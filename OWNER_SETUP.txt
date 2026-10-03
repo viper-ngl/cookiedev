@@ -1,0 +1,22 @@
+CLOUDFLARE SECRETS
+Go to: Workers & Pages > your project > Settings > Variables and Secrets
+Add each as a Secret (not a plain variable):
+
+  OWNER_PASSWORD     your chosen password for /admin
+  OWNER_SECRET       any long random string e.g. parkside2026xK9mPqL7nR
+  ROBLOX_API_KEY     your Open Cloud API key (starts with rblx_)
+
+HOW TO GET YOUR ROBLOX_API_KEY:
+  1. Go to create.roblox.com
+  2. Left sidebar > API Keys > Create API Key
+  3. Name: Parkside Panel
+  4. Access Permissions > add Group > enable group:read and group:write
+  5. Copy the key (starts with rblx_) and paste it as ROBLOX_API_KEY
+
+CLOUDFLARE KV BINDING
+Go to: Settings > Bindings > Add
+  Type:          KV Namespace
+  Variable name: DEPT
+  KV Namespace:  parkside-dept (create under Storage > Workers KV first)
+
+THAT IS EVERYTHING. No other secrets or bindings needed.

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ranks | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--g:#fff;--s:rgba(255,255,255,.03);--b:rgba(255,255,255,.07);--m:#4b5563}
+*{box-sizing:border-box;margin:0;padding:0}body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,9,13,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--b);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.nl{display:flex;align-items:center;gap:10px;text-decoration:none}.nl img{width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1)}.nl span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.05em}
+.nlinks a{color:#6b7280;font-size:13px;text-decoration:none;margin-left:26px;transition:color .2s}.nlinks a:hover,.nlinks a.act{color:#fff;font-weight:600}
+.btn{display:inline-flex;align-items:center;font-weight:600;font-size:13px;padding:8px 18px;border-radius:8px;text-decoration:none;transition:all .2s}.bg{background:#e0e0e0;color:#08090d}.bg:hover{background:#fff}
+.banner{position:relative;height:200px;overflow:hidden}.banner img{width:100%;height:100%;object-fit:cover;display:block}
+.bov{position:absolute;inset:0;background:linear-gradient(to top,#08090d,rgba(8,9,13,.45) 60%,transparent)}
+.bc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:28px;text-align:center}
+.syncbar{background:rgba(200,200,200,.025);border-bottom:1px solid var(--b);padding:9px 32px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--m)}
+.sdot{width:6px;height:6px;border-radius:50%;background:#e0e0e0;animation:bl 1.4s ease infinite;flex-shrink:0}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+main{max-width:1100px;margin:0 auto;padding:40px 32px 80px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:24px;transition:border-color .2s}.card:hover{border-color:rgba(255,255,255,.12)}
+.cath{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.catd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.catn{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.rrow{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start}.rrow:last-child{border-bottom:none}
+.rb{width:26px;height:26px;border-radius:6px;background:rgba(200,200,200,.06);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#6b7280;flex-shrink:0;margin-top:1px}
+.rn{font-size:13px;font-weight:700;color:#e5e7eb;margin-bottom:2px}
+.rnote{font-size:11px;color:#374151}
+.rm{font-size:11px;color:#374151;cursor:pointer;transition:color .2s;margin-top:3px}.rm:hover{color:#9ca3af}
+.ml{display:none;margin-top:6px;background:rgba(0,0,0,.25);border-radius:7px;padding:7px;max-height:100px;overflow-y:auto}
+.ml::-webkit-scrollbar{width:2px}.ml::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
+.mi{font-size:11px;color:#6b7280;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.03)}.mi:last-child{border-bottom:none}
+footer{border-top:1px solid var(--b);padding:24px 32px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer span,footer a{font-size:12px;color:#374151;text-decoration:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nl"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE STORES</span></a>
+  <div class="nlinks"><a href="/">Home</a><a href="/staff">Staff</a><a href="/ranks" class="act">Ranks</a><a href="/servers">Servers</a></div>
+  <a href="https://www.roblox.com/communities/993201720/Parkside-Stores-Limited" class="btn bg">Join Group</a>
+</nav>
+<div class="banner">
+  <img id="bimg" src="/images/store.png" alt="">
+  <div class="bov"></div>
+  <div class="bc">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:8px">Progression</div>
+    <h1 style="font-family:'Geist','Inter',sans-serif;font-size:clamp(24px,5vw,46px);font-weight:900;letter-spacing:-.02em">Group Hierarchy</h1>
+  </div>
+</div>
+<div class="syncbar"><span class="sdot" id="sdot"></span><span id="smsg">Syncing live member data...</span></div>
+<main>
+<div class="grid">
+  <div class="card"><div class="cath"><span class="catd" style="background:#c084fc"></span><span class="catn" style="color:#c084fc">Executive Leadership</span></div><div id="c1"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#f472b6"></span><span class="catn" style="color:#f472b6">Executive Management</span></div><div id="c2"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#f87171"></span><span class="catn" style="color:#f87171">Development Team</span></div><div id="c3"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#818cf8"></span><span class="catn" style="color:#818cf8">Directorship Management</span></div><div id="c4"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#60a5fa"></span><span class="catn" style="color:#60a5fa">Senior Management</span></div><div id="c5"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#34d399"></span><span class="catn" style="color:#34d399">Management Team</span></div><div id="c6"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#fbbf24"></span><span class="catn" style="color:#fbbf24">Store Security Team</span></div><div id="c7"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#fb923c"></span><span class="catn" style="color:#fb923c">Store Colleague Team</span></div><div id="c8"></div></div>
+  <div class="card"><div class="cath"><span class="catd" style="background:#94a3b8"></span><span class="catn" style="color:#94a3b8">Normal Roles</span></div><div id="c9"></div></div>
+</div>
+</main>
+<footer><span>© 2026 Parkside Stores</span><a href="/">← Home</a></footer>
+<script>
+const photos=['/images/store.png','/images/cafe.png','/images/bg.png'];
+document.getElementById('bimg').src=photos[Math.floor(Math.random()*photos.length)];
+const G=993201720;
+const CATS={c1:[{n:'Group Holder'},{n:'Store Director'},{n:'Vice Director'}],c2:[{n:'Operations Officer'},{n:'Staffing Officer'},{n:'Development Officer'}],c3:[{n:'Development Team'}],c4:[{n:'Board Of Directors',note:'Department Lead'},{n:'Junior Director',note:'Department Co-Lead'},{n:'Intern Director',note:'Department Manager'}],c5:[{n:'Head Corporate'},{n:'Senior Corporate'},{n:'Junior Corporate'},{n:'Intern Corporate'}],c6:[{n:'Booster Manager',note:'Gain from boosting the server'},{n:'Regional Manager'},{n:'Store Manager'},{n:'Assistant Manager'},{n:'Store Supervisor'}],c7:[{n:'Lead Store Security'},{n:'Senior Store Security'},{n:'Junior Store Security'}],c8:[{n:'Lead Store Colleague'},{n:'Senior Store Colleague'},{n:'Junior Store Colleague'}],c9:[{n:'Trainee'},{n:'Noted Customer'},{n:'myParkside Members'}]};
+let t=0;
+function row(name,note,users,num){const id='m'+(t++);const n=num>=0?`#${num+1}`:'';
+return`<div class="rrow"><div class="rb">${n||''}</div><div style="flex:1"><div class="rn">${name}</div>${note?`<div class="rnote">${note}</div>`:''}${users.length?`<div class="rm" onclick="var e=document.getElementById('${id}');e.style.display=e.style.display==='block'?'none':'block'">${users.length} member${users.length!==1?'s':''}, tap to expand</div><div class="ml" id="${id}">${users.map(u=>`<div class="mi">${u}</div>`).join('')}</div>`:`<div class="rnote">No members</div>`}</div></div>`;}
+async function sync(){
+  try{const rd=await fetch(`https://groups.roproxy.com/v1/groups/${G}/roles`).then(r=>r.json());const map={};rd.roles.forEach(r=>map[r.name.trim()]=r.id);
+    for(const[cid,roles]of Object.entries(CATS)){const el=document.getElementById(cid);const rows=[];
+      for(let i=0;i<roles.length;i++){const{n,note}=roles[i];const rId=map[n];let u=[];if(rId){try{const d=await fetch(`https://groups.roproxy.com/v1/groups/${G}/roles/${rId}/users?limit=100`).then(r=>r.json());u=d.data?.map(x=>x.username)||[];}catch{}}rows.push(row(n,note||'',u,roles.length>1?i:-1));}el.innerHTML=rows.join('');}
+    document.getElementById('smsg').textContent='Live data synced';document.getElementById('sdot').style.cssText='background:#e0e0e0;animation:none;width:6px;height:6px;border-radius:50%;flex-shrink:0';
+  }catch{document.getElementById('smsg').textContent='Could not sync';document.getElementById('sdot').style.background='#ef4444';}
+}sync();
+</script>
+</body></html>

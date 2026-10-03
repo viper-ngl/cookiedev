@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Owner Panel | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--g:#fff;--s:rgba(255,255,255,.04);--b:rgba(255,255,255,.08);--b2:rgba(255,255,255,.05);--m:#4b5563}
+*{box-sizing:border-box;margin:0;padding:0}body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh}
+#lp{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(255,255,255,.1),transparent)}
+.lcard{background:rgba(200,200,200,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:40px;width:100%;max-width:400px}
+.llogo{display:flex;align-items:center;gap:10px;margin-bottom:32px}.llogo img{width:28px;height:28px;object-fit:contain;filter:brightness(0) invert(1)}.llogo span{font-family:'Geist','Inter',sans-serif;font-weight:900;font-size:16px;letter-spacing:.04em}
+input,select{width:100%;background:rgba(200,200,200,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 16px;font-size:14px;color:#f9fafb;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:10px}
+input:focus,select:focus{border-color:rgba(255,255,255,.5)}input::placeholder{color:#374151}select option{background:#1a1c24}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:13px;padding:12px 18px;border-radius:10px;transition:all .2s;cursor:pointer;border:none;font-family:inherit;text-decoration:none}
+.bg{background:#e0e0e0;color:#08090d}.bg:hover{background:#fff}
+.bgh{background:rgba(200,200,200,.05);border:1px solid rgba(255,255,255,.08);color:#9ca3af}.bgh:hover{background:rgba(200,200,200,.09);color:#fff}
+.bred{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171}.bred:hover{background:rgba(239,68,68,.25)}
+.borange{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:#fb923c}.borange:hover{background:rgba(249,115,22,.25)}
+.err{color:#f87171;font-size:12px;text-align:center;margin-top:8px;min-height:18px}
+#ap{display:none;min-height:100vh;flex-direction:column}
+.topbar{background:rgba(8,9,13,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--b);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.tbrand{display:flex;align-items:center;gap:10px}.tbrand img{width:22px;height:22px;object-fit:contain;filter:brightness(0) invert(1)}.tbrand span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:14px;letter-spacing:.04em}
+.tright{display:flex;align-items:center;gap:10px}
+.opill{display:flex;align-items:center;gap:6px;background:rgba(200,200,200,.1);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:600;color:#e0e0e0}
+.odot{width:6px;height:6px;border-radius:50%;background:#e0e0e0;animation:bl 1.4s ease infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.bsm{font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(200,200,200,.04);color:#9ca3af;cursor:pointer;font-family:inherit;transition:all .2s}.bsm:hover{background:rgba(200,200,200,.08);color:#fff}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:rgba(200,200,200,.015);border-right:1px solid var(--b);padding:20px 12px;overflow-y:auto}
+.ssec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#374151;padding:0 8px;margin:20px 0 8px}.ssec:first-child{margin-top:0}
+.slink{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;transition:all .2s;border:none;background:none;width:100%;font-family:inherit;text-align:left}.slink:hover{background:rgba(200,200,200,.05);color:#fff}.slink.act{background:rgba(200,200,200,.12);color:#e0e0e0;font-weight:600}
+.bc{margin-left:auto;background:rgba(200,200,200,.08);border-radius:5px;padding:1px 7px;font-size:10px;font-weight:700;color:#6b7280}
+.content{padding:32px;overflow:auto}
+.pv{display:none}.pv.act{display:block}
+.ph{margin-bottom:24px}.ph h1{font-family:'Geist','Inter',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}.ph p{color:var(--m);font-size:13px}
+.srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:24px}
+.sc{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:18px 20px}.scv{font-family:'Geist','Inter',sans-serif;font-size:28px;font-weight:800;margin-bottom:2px}.scl{font-size:11px;color:var(--m);font-weight:500}
+.dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:12px}
+.dc{background:var(--s);border:1px solid var(--b);border-radius:14px;overflow:hidden}
+.dch{padding:13px 16px;border-bottom:1px solid var(--b2);display:flex;align-items:center;justify-content:space-between}
+.dct{font-size:13px;font-weight:700}.dcc{font-size:11px;color:var(--m)}
+.mr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--b2)}.mr:last-child{border-bottom:none}
+.mr img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#1a1c24;flex-shrink:0}
+.mn{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm{font-size:10px;color:var(--m)}
+.macts{display:flex;gap:5px;flex-shrink:0}
+.ib{width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.07);background:rgba(200,200,200,.04);color:#6b7280;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px}.ib:hover{background:rgba(200,200,200,.1);color:#fff}.ib.d:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#f87171}
+.fc{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:24px;margin-bottom:20px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fgl{display:flex;flex-direction:column;gap:6px}
+.fgl label{font-size:11px;font-weight:700;color:var(--m);letter-spacing:.04em;text-transform:uppercase}
+.fgl input,.fgl select{margin-bottom:0}
+.gcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.gc{background:var(--s);border:1px solid var(--b);border-radius:14px;overflow:hidden;transition:border-color .2s}.gc:hover{border-color:rgba(255,255,255,.14)}
+.gc img{width:100%;height:110px;object-fit:cover;display:block;background:#111}
+.gcb{padding:14px 16px}.gcn{font-size:13px;font-weight:700;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcst{display:flex;gap:10px;font-size:11px;color:var(--m);margin-bottom:12px}
+.toggle{position:relative;width:36px;height:20px;flex-shrink:0}.toggle input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#374151;border-radius:100px;transition:.3s;cursor:pointer}.slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}.toggle input:checked+.slider{background:var(--g)}.toggle input:checked+.slider::before{transform:translateX(16px)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}.modal-bg.open{display:flex}
+.modal{background:#111318;border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:28px;width:100%;max-width:480px}
+.modal h2{font-family:'Geist','Inter',sans-serif;font-size:18px;font-weight:800;margin-bottom:6px}.modal p{color:var(--m);font-size:13px;margin-bottom:16px}
+.macts2{display:flex;gap:10px;margin-top:20px}
+.bcancel{flex:1;background:rgba(200,200,200,.05);border:1px solid rgba(255,255,255,.08);color:#9ca3af;font-size:13px;font-weight:600;padding:11px;border-radius:9px;cursor:pointer;font-family:inherit}
+.bconfirm{flex:1;background:#fff;color:#08090d;font-size:13px;font-weight:700;padding:11px;border-radius:9px;border:none;cursor:pointer;font-family:inherit}
+.toast{position:fixed;bottom:24px;right:24px;background:#1a1c24;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 18px;font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all .35s;pointer-events:none;max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}.toast.ok{border-color:rgba(255,255,255,.4);color:#e0e0e0}.toast.fail{border-color:rgba(239,68,68,.4);color:#f87171}
+.logrow{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--b2)}.logrow:last-child{border-bottom:none}
+.logi{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:rgba(200,200,200,.05)}
+.logt{font-size:13px;line-height:1.5}.logts{font-size:11px;color:#374151;margin-top:2px}
+.alog-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--b2)}.alog-row:last-child{border-bottom:none}
+.alog-type{background:rgba(200,200,200,.06);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;color:#9ca3af;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.alog-main{font-size:13px;font-weight:600;color:#e5e7eb}
+.alog-sub{font-size:11px;color:var(--m);margin-top:2px}
+.alog-time{font-size:11px;color:#374151;margin-top:2px}
+.user-result{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:20px;display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.user-result img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#1a1c24;flex-shrink:0}
+.user-result .un{font-size:16px;font-weight:800;margin-bottom:4px}
+.user-result .ur{font-size:13px;color:var(--m)}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-top:16px}
+.role-btn{background:rgba(200,200,200,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:10px 14px;font-size:12px;font-weight:600;color:#9ca3af;cursor:pointer;font-family:inherit;transition:all .2s;text-align:left}
+.role-btn:hover{background:rgba(200,200,200,.1);border-color:rgba(255,255,255,.3);color:#e0e0e0}
+.role-btn.current{background:rgba(200,200,200,.12);border-color:rgba(255,255,255,.3);color:#e0e0e0}
+.role-btn .rrank{font-size:10px;font-weight:400;color:#374151;display:block;margin-top:2px}
+@media(max-width:768px){.layout{grid-template-columns:1fr}.sidebar{display:none}.fg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="lp">
+  <div class="lcard">
+    <div class="llogo"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE OWNER PANEL</span></div>
+    <h2 style="font-family:'Geist','Inter',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">Welcome back</h2>
+    <p style="color:var(--m);font-size:13px;margin-bottom:28px">Sign in to manage Parkside Stores.</p>
+    <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+    <button id="lbtn" style="width:100%;background:#e0e0e0;color:#08090d;font-weight:700;font-size:14px;padding:13px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;transition:all .2s">Sign In</button>
+    <div class="err" id="lerr"></div>
+  </div>
+</div>
+
+<div id="ap">
+  <div class="topbar">
+    <div class="tbrand"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE OWNER PANEL</span></div>
+    <div class="tright">
+      <div class="opill"><span class="odot"></span><span id="onc">Loading...</span></div>
+      <a href="/" target="_blank" class="bsm">View Site</a>
+      <button class="bsm" id="lout">Sign out</button>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="ssec">Dashboard</div>
+      <button class="slink act" data-p="overview"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Overview</button>
+      <div class="ssec">Staff</div>
+      <button class="slink" data-p="departments"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Departments<span class="bc" id="dept-badge">0</span></button>
+      <button class="slink" data-p="add-person"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Add Person</button>
+      <div class="ssec">Group Management</div>
+      <button class="slink" data-p="manage-user"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Manage User</button>
+      <button class="slink" data-p="audit"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>Audit Log</button>
+      <div class="ssec">Games</div>
+      <button class="slink" data-p="games"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Track Games<span class="bc" id="game-badge">0</span></button>
+      <button class="slink" data-p="add-game"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Add Game</button>
+      <div class="ssec">Other</div>
+      <button class="slink" data-p="activity"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Activity Log</button>
+      <button class="slink" data-p="links"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Quick Links</button>
+    </div>
+    <div class="content">
+
+      <div class="pv act" id="pv-overview">
+        <div class="ph"><h1>Overview</h1><p>Live stats from Roblox and your servers.</p></div>
+        <div class="srow">
+          <div class="sc"><div class="scv" id="ov-mem">—</div><div class="scl">Group Members</div></div>
+          <div class="sc"><div class="scv" id="ov-vis">—</div><div class="scl">Total Visits</div></div>
+          <div class="sc"><div class="scv" id="ov-onl">—</div><div class="scl">Players Online</div></div>
+          <div class="sc"><div class="scv" id="ov-srv">—</div><div class="scl">Active Servers</div></div>
+          <div class="sc"><div class="scv" id="ov-dep">—</div><div class="scl">Dept Members</div></div>
+          <div class="sc"><div class="scv" id="ov-gam">—</div><div class="scl">Tracked Games</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:var(--s);border:1px solid var(--b);border-radius:14px;padding:20px">
+            <div style="font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Quick Actions</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <button class="slink" style="width:100%" onclick="sp('add-person')">+ Add person to department</button>
+              <button class="slink" style="width:100%" onclick="sp('manage-user')">Manage a group member</button>
+              <button class="slink" style="width:100%" onclick="sp('audit')">View group audit log</button>
+              <button class="slink" style="width:100%" onclick="sp('add-game')">+ Add tracked game</button>
+              <a href="/staff" target="_blank" class="slink" style="text-decoration:none">View public staff page</a>
+            </div>
+          </div>
+          <div style="background:var(--s);border:1px solid var(--b);border-radius:14px;padding:20px">
+            <div style="font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Group Info</div>
+            <div id="grp-info" style="color:#374151;font-size:13px">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv" id="pv-departments">
+        <div class="ph"><h1>Departments</h1><p>Manage members. Click edit to move someone to a different department.</p></div>
+        <div class="dcards" id="dept-cards"><div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">Loading...</div></div>
+      </div>
+
+      <div class="pv" id="pv-add-person">
+        <div class="ph"><h1>Add Person</h1><p>Add a Roblox user to a department. Rank auto-fills from the group.</p></div>
+        <div class="fc" style="max-width:560px">
+          <div class="fg">
+            <div class="fgl"><label>Roblox Username</label><input id="ap-u" placeholder="e.g. ParkUser123"></div>
+            <div class="fgl"><label>Department</label><input id="ap-d" placeholder="e.g. Security, Development"></div>
+            <div class="fgl"><label>Rank Override (optional)</label><input id="ap-r" placeholder="Auto-filled from group"></div>
+            <div style="display:flex;align-items:flex-end"><button class="btn bg" id="ap-btn" style="width:100%;font-size:13px;padding:12px">Add Person</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv" id="pv-manage-user">
+        <div class="ph"><h1>Manage User</h1><p>Search for any group member to promote, demote or exile them.</p></div>
+        <div class="fc" style="max-width:480px;margin-bottom:20px">
+          <div style="display:flex;gap:10px">
+            <input id="mu-search" placeholder="Roblox username" style="margin-bottom:0;flex:1">
+            <button class="btn bg" id="mu-btn" style="padding:12px 20px;font-size:13px">Search</button>
+          </div>
+        </div>
+        <div id="mu-result" style="display:none">
+          <div class="user-result">
+            <img id="mu-avatar" src="" alt="">
+            <div style="flex:1">
+              <div class="un" id="mu-name"></div>
+              <div class="ur">Current rank: <strong id="mu-rank" style="color:#f9fafb"></strong></div>
+              <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+                <button class="btn borange" id="mu-exile" style="padding:8px 16px;font-size:12px">Exile from Group</button>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Set Rank</div>
+          <div class="role-grid" id="mu-roles"></div>
+        </div>
+        <div id="mu-empty" style="color:#374151;font-size:13px;padding:20px 0;display:none">User not found or not in group.</div>
+      </div>
+
+      <div class="pv" id="pv-audit">
+        <div class="ph"><h1>Group Audit Log</h1><p>Recent actions taken in the Parkside Stores Roblox group.</p></div>
+        <div style="background:var(--s);border:1px solid var(--b);border-radius:14px;padding:20px">
+          <div id="audit-list"><div style="color:#374151;font-size:13px;text-align:center;padding:32px 0">Loading audit log...</div></div>
+          <div style="text-align:center;margin-top:16px"><button class="btn bgh" id="audit-more" style="font-size:12px;padding:8px 20px;display:none">Load More</button></div>
+        </div>
+      </div>
+
+      <div class="pv" id="pv-games">
+        <div class="ph"><h1>Tracked Games</h1><p>Toggle games on or off. Only enabled games appear on the public site.</p></div>
+        <div class="gcards" id="game-cards"><div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">Loading...</div></div>
+      </div>
+
+      <div class="pv" id="pv-add-game">
+        <div class="ph"><h1>Add Game</h1><p>Enter the Universe ID of the Roblox game to track. Find it in Roblox Studio under Game Settings.</p></div>
+        <div class="fc" style="max-width:480px">
+          <div class="fgl" style="margin-bottom:12px"><label>Universe ID</label><input id="ag-uid" placeholder="e.g. 7264690285" type="number"></div>
+          <button class="btn bg" id="ag-btn" style="width:100%;font-size:13px;padding:12px">Add Game</button>
+        </div>
+      </div>
+
+      <div class="pv" id="pv-activity">
+        <div class="ph"><h1>Activity Log</h1><p>Changes made through this panel this session.</p></div>
+        <div style="background:var(--s);border:1px solid var(--b);border-radius:14px;padding:20px"><div id="activity-log"><div style="color:#374151;font-size:13px;text-align:center;padding:24px 0">No activity recorded yet.</div></div></div>
+      </div>
+
+      <div class="pv" id="pv-links">
+        <div class="ph"><h1>Quick Links</h1><p>Useful links for managing Parkside Stores.</p></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+          ${[['🎮','Roblox Group','https://www.roblox.com/communities/993201720/Parkside-Stores-Limited'],['💬','Discord','https://discord.gg/ceAmhWdhda'],['⚙️','Staff Portal','https://parksidestores.planetaryapp.cloud/'],['🌐','Public Site','/'],['👥','Staff Page','/staff'],['🏆','Ranks Page','/ranks'],['📡','Servers Page','/servers']].map(([i,l,u])=>`<a href="${u}" target="_blank" style="background:var(--s);border:1px solid var(--b);border-radius:12px;padding:18px;text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px;transition:all .2s;font-size:13px;font-weight:600" onmouseover="this.style.borderColor='rgba(255,255,255,.15)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">${i} ${l} ↗</a>`).join('')}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="edit-modal">
+  <div class="modal">
+    <h2>Edit Member</h2>
+    <p>Move <strong id="edit-name"></strong> to a different department or update their rank.</p>
+    <div class="fgl" style="margin-bottom:10px"><label>Department</label><input id="edit-dept" placeholder="New department" style="margin-bottom:0"></div>
+    <div class="fgl"><label>Rank Override (optional)</label><input id="edit-rank" placeholder="Leave blank to keep current" style="margin-bottom:0"></div>
+    <div class="macts2"><button class="bcancel" onclick="closeModal()">Cancel</button><button class="bconfirm" id="edit-confirm">Save Changes</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const api=(u,m='GET',b)=>fetch(u,{method:m,headers:{'content-type':'application/json'},body:b?JSON.stringify(b):undefined}).then(async r=>({ok:r.ok,d:await r.json().catch(()=>({}))}));
+const SBK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1a3Jkb2JwcW5mZWxseHhleXh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyNDEyMDUsImV4cCI6MjEwMjgxNzIwNX0.anh0lWDFEBcjG2J_dcX53JE14BoTVpy2waOlcopinug';
+let log=[],editT=null,allP=[],allG=[],allRoles=[],muUser=null,auditCursor=null;
+
+function toast(msg,ok=true){const t=$('toast');t.textContent=msg;t.className='toast '+(ok?'ok':'fail');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+function addLog(msg,icon='📝'){log.unshift({msg,icon,time:new Date().toLocaleTimeString()});$('activity-log').innerHTML=log.map(a=>`<div class="logrow"><div class="logi">${a.icon}</div><div><div class="logt">${esc(a.msg)}</div><div class="logts">${a.time}</div></div></div>`).join('');}
+function sp(p){document.querySelectorAll('.slink[data-p]').forEach(b=>b.classList.toggle('act',b.dataset.p===p));document.querySelectorAll('.pv').forEach(v=>v.classList.toggle('act',v.id==='pv-'+p));if(p==='audit'&&!auditCursor&&$('audit-list').children[0]?.textContent.includes('Loading'))loadAudit();}
+document.querySelectorAll('.slink[data-p]').forEach(b=>b.addEventListener('click',()=>sp(b.dataset.p)));
+
+async function checkLogin(){const{d}=await api('/api/login');if(d.owner)showApp();}
+$('lbtn').onclick=async()=>{$('lerr').textContent='';$('lbtn').textContent='Signing in...';const r=await api('/api/login','POST',{password:$('pw').value});$('pw').value='';$('lbtn').textContent='Sign In';if(r.ok){showApp();}else{$('lerr').textContent=r.d.error||'Wrong password — check OWNER_PASSWORD in Cloudflare Secrets';}};
+$('pw').onkeydown=e=>e.key==='Enter'&&$('lbtn').click();
+$('lout').onclick=async()=>{await api('/api/login','DELETE');location.reload();};
+function showApp(){$('lp').style.display='none';const a=$('ap');a.style.display='flex';a.style.flexDirection='column';loadAll();}
+
+async function loadAll(){loadStats();loadDepts();loadGames();loadRoles();}
+
+async function loadStats(){
+  try{const g=await fetch('https://groups.roproxy.com/v1/groups/993201720').then(r=>r.json());$('ov-mem').textContent=(g.memberCount||0).toLocaleString();$('grp-info').innerHTML=`<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between"><span style="color:var(--m)">Group ID</span><span style="font-weight:600">993201720</span></div><div style="display:flex;justify-content:space-between"><span style="color:var(--m)">Members</span><span style="font-weight:600">${(g.memberCount||0).toLocaleString()}</span></div><div style="display:flex;justify-content:space-between"><span style="color:var(--m)">Owner</span><span style="font-weight:600">${g.owner?.username||'—'}</span></div></div>`;}catch{}
+  try{const{games:g}=await fetch('/api/games').then(r=>r.json()).catch(()=>({games:[]}));if(g?.length){const tp=g.reduce((a,x)=>a+(x.playing||0),0);const tv=g.reduce((a,x)=>a+(x.visits||0),0);$('ov-onl').textContent=tp.toLocaleString();$('ov-vis').textContent=tv>=1000?(tv/1000).toFixed(1)+'k':tv;$('onc').textContent=tp+' online';}}catch{}
+  try{const s=await fetch('https://yukrdobpqnfellxxeyxv.supabase.co/rest/v1/servers?select=total_players',{headers:{'apikey':SBK,'Authorization':'Bearer '+SBK}}).then(r=>r.json());if(Array.isArray(s))$('ov-srv').textContent=s.length;}catch{}
+}
+
+async function loadRoles(){
+  try{const{roles}=await api('/api/roblox?action=roles').then(r=>r.d);allRoles=roles||[];}catch{}
+}
+
+async function loadDepts(){
+  const{d}=await api('/api/departments');allP=d.people||[];$('ov-dep').textContent=allP.length;$('dept-badge').textContent=allP.length;renderDepts();
+}
+function renderDepts(){
+  const c=$('dept-cards');if(!allP.length){c.innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">No one added yet.</div>';return;}
+  const by={};allP.forEach(p=>(by[p.department]||=[]).push(p));
+  c.innerHTML=Object.entries(by).map(([dept,ps])=>`<div class="dc"><div class="dch"><div class="dct">${esc(dept)}</div><div class="dcc">${ps.length} member${ps.length!==1?'s':''}</div></div>${ps.map(p=>`<div class="mr"><img src="${esc(p.avatar||'')}" alt="" onerror="this.style.visibility='hidden'"><div style="flex:1;min-width:0"><div class="mn">${esc(p.name)}</div><div class="mm">${esc(p.rank)}</div></div><div class="macts"><button class="ib" onclick="openEdit(${+p.id},'${esc(p.name)}','${esc(p.department)}','${esc(p.rank)}')" title="Edit">✏️</button><button class="ib d" onclick="rmPerson(${+p.id},'${esc(p.name)}')" title="Remove">🗑️</button></div></div>`).join('')}</div>`).join('');
+}
+
+async function loadGames(){
+  const{d}=await api('/api/games');allG=d.games||[];$('ov-gam').textContent=allG.length;$('game-badge').textContent=allG.length;
+  const c=$('game-cards');if(!allG.length){c.innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">No games added yet.</div>';return;}
+  c.innerHTML=allG.map(g=>`<div class="gc">${g.thumb?`<img src="${esc(g.thumb)}" alt="">`:'<div style="width:100%;height:110px;background:#111"></div>'}<div class="gcb"><div class="gcn">${esc(g.name)}</div><div class="gcst"><span>${(g.playing||0).toLocaleString()} playing</span><span>${((g.visits||0)/1000).toFixed(1)}k visits</span></div><div style="display:flex;gap:8px;justify-content:space-between;align-items:center"><label class="toggle"><input type="checkbox" ${g.enabled!==false?'checked':''} onchange="toggleGame(${g.universeId},this.checked)"><span class="slider"></span></label><span style="font-size:11px;color:var(--m)">${g.enabled!==false?'Enabled':'Disabled'}</span><button class="ib d" onclick="rmGame(${g.universeId},'${esc(g.name)}')" title="Remove">🗑️</button></div></div></div>`).join('');
+}
+
+async function loadAudit(cursor=''){
+  const url='/api/roblox?action=audit&limit=25'+(cursor?'&cursor='+cursor:'');
+  const{d}=await api(url);
+  const list=$('audit-list');
+  const rows=(d.logs||[]);
+  if(!rows.length&&!cursor){list.innerHTML='<div style="color:#374151;font-size:13px;text-align:center;padding:32px 0">No audit entries found. Make sure ROBLOX_API_KEY is set in Cloudflare Secrets.</div>';return;}
+  const TYPE_ICONS={'DeleteGroupShout':'📢','PostGroupShout':'📢','ChangeRank':'🔄','AcceptJoinRequest':'✅','DeclineJoinRequest':'❌','ExileUser':'🚫','AwardBadge':'🏅','RemoveMember':'🗑️','SpendGroupFunds':'💰'};
+  const html=rows.map(r=>{const icon=TYPE_ICONS[r.type]||'📋';const detail=r.oldRole&&r.newRole?`${esc(r.target)}: ${esc(r.oldRole)} to ${esc(r.newRole)}`:r.target?esc(r.target):'';const time=r.time?new Date(r.time).toLocaleString():'';return`<div class="alog-row"><span class="alog-type">${icon} ${esc(r.type||'')}</span><div style="flex:1"><div class="alog-main">${esc(r.actor)}</div>${detail?`<div class="alog-sub">${detail}</div>`:''}${time?`<div class="alog-time">${time}</div>`:''}</div></div>`;}).join('');
+  if(cursor){list.innerHTML+=html;}else{list.innerHTML=html;}
+  auditCursor=d.nextCursor||null;
+  const moreBtn=$('audit-more');moreBtn.style.display=auditCursor?'inline-flex':'none';
+}
+
+$('audit-more').onclick=()=>loadAudit(auditCursor);
+
+$('mu-btn').onclick=async()=>{
+  const q=$('mu-search').value.trim();if(!q)return;
+  $('mu-btn').textContent='Searching...';$('mu-result').style.display='none';$('mu-empty').style.display='none';
+  const{d}=await api('/api/roblox?action=search&q='+encodeURIComponent(q));
+  $('mu-btn').textContent='Search';
+  if(!d.user||!d.user.inGroup){$('mu-empty').style.display='block';return;}
+  muUser=d.user;
+  try{const th=await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${d.user.id}&size=150x150&format=Png`).then(r=>r.json());$('mu-avatar').src=th.data?.[0]?.imageUrl||'';}catch{}
+  $('mu-name').textContent=d.user.name;
+  $('mu-rank').textContent=d.user.currentRole||'No rank';
+  $('mu-roles').innerHTML=allRoles.map(r=>`<button class="role-btn${r.name===d.user.currentRole?' current':''}" onclick="setRole(${r.id},'${esc(r.name)}')">${esc(r.name)}<span class="rrank">Rank ${r.rank}</span></button>`).join('');
+  $('mu-result').style.display='block';
+};
+$('mu-search').onkeydown=e=>e.key==='Enter'&&$('mu-btn').click();
+
+async function setRole(roleId,roleName){
+  if(!muUser)return;if(!confirm(`Set ${muUser.name} to ${roleName}?`))return;
+  const r=await api('/api/roblox','POST',{action:'setRole',userId:muUser.id,roleId});
+  if(r.ok){toast(`Set ${muUser.name} to ${roleName}`);addLog(`Set ${muUser.name} to ${roleName}`,'🔄');$('mu-rank').textContent=roleName;document.querySelectorAll('.role-btn').forEach(b=>b.classList.toggle('current',b.textContent.startsWith(roleName)));}
+  else toast(r.d.error||'Failed.',false);
+}
+
+$('mu-exile').onclick=async()=>{
+  if(!muUser)return;if(!confirm(`Exile ${muUser.name} from the group? This cannot be undone.`))return;
+  const r=await api('/api/roblox','POST',{action:'exile',userId:muUser.id});
+  if(r.ok){toast(`Exiled ${muUser.name}`);addLog(`Exiled ${muUser.name} from group`,'🚫');$('mu-result').style.display='none';muUser=null;}
+  else toast(r.d.error||'Failed.',false);
+};
+
+$('ap-btn').onclick=async()=>{const u=$('ap-u').value.trim(),d=$('ap-d').value.trim(),r=$('ap-r').value.trim();if(!u||!d){toast('Username and department required.',false);return;}$('ap-btn').textContent='Adding...';const res=await api('/api/departments','POST',{username:u,department:d,rank:r});$('ap-btn').textContent='Add Person';if(res.ok){toast('Added '+u+' to '+d);addLog('Added '+u+' to '+d,'➕');$('ap-u').value=$('ap-d').value=$('ap-r').value='';loadDepts();}else toast(res.d.error||'Error',false);};
+
+$('ag-btn').onclick=async()=>{const uid=$('ag-uid').value.trim();if(!uid){toast('Universe ID required.',false);return;}$('ag-btn').textContent='Adding...';const res=await api('/api/games','POST',{universeId:+uid});$('ag-btn').textContent='Add Game';if(res.ok){toast('Game added: '+(res.d.game?.name||uid));addLog('Added game: '+(res.d.game?.name||uid),'🎮');$('ag-uid').value='';loadGames();}else toast(res.d.error||'Error',false);};
+
+async function rmPerson(id,name){if(!confirm('Remove '+name+'?'))return;const r=await api('/api/departments?id='+id,'DELETE');if(r.ok){toast('Removed '+name);addLog('Removed '+name,'🗑️');loadDepts();}else toast('Failed.',false);}
+async function rmGame(uid,name){if(!confirm('Remove '+name+'?'))return;const r=await api('/api/games?universeId='+uid,'DELETE');if(r.ok){toast('Removed '+name);addLog('Removed game: '+name,'🗑️');loadGames();}else toast('Failed.',false);}
+async function toggleGame(uid,enabled){const r=await api('/api/games','PATCH',{universeId:uid,enabled});if(r.ok){addLog((enabled?'Enabled':'Disabled')+' game ID '+uid,'🔄');loadGames();}else toast('Failed.',false);}
+
+let editT=null;
+function openEdit(id,name,dept,rank){editT={id,name,dept,rank};$('edit-name').textContent=name;$('edit-dept').value=dept;$('edit-rank').value=rank;$('edit-modal').classList.add('open');}
+function closeModal(){$('edit-modal').classList.remove('open');editT=null;}
+$('edit-modal').addEventListener('click',e=>{if(e.target===$('edit-modal'))closeModal();});
+$('edit-confirm').onclick=async()=>{if(!editT)return;const nd=$('edit-dept').value.trim(),nr=$('edit-rank').value.trim();if(!nd){toast('Department required.',false);return;}$('edit-confirm').textContent='Saving...';const r=await api('/api/departments','POST',{username:editT.name,department:nd,rank:nr||editT.rank});$('edit-confirm').textContent='Save Changes';if(r.ok){toast('Updated '+editT.name);addLog('Moved '+editT.name+' to '+nd,'🔄');closeModal();loadDepts();}else toast(r.d.error||'Failed.',false);};
+
+checkLogin();setInterval(loadStats,60000);
+</script>
+</body></html>
