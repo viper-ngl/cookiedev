@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Staff Portal | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh}
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.lcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:40px;width:100%;max-width:420px;text-align:center}
+.logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:28px}.logo img{width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1)}.logo span{font-family:'Geist','Inter',sans-serif;font-weight:900;font-size:16px;letter-spacing:.05em}
+.bdisc{display:flex;align-items:center;justify-content:center;gap:12px;background:#5865F2;color:#fff;font-weight:700;font-size:15px;padding:14px 24px;border-radius:12px;text-decoration:none;transition:all .2s;width:100%}.bdisc:hover{background:#4752c4}
+#portal{display:none;min-height:100vh;flex-direction:column}
+.topbar{background:rgba(8,9,13,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.tbrand{display:flex;align-items:center;gap:10px}.tbrand img{width:22px;height:22px;object-fit:contain;filter:brightness(0) invert(1)}.tbrand span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:14px;letter-spacing:.04em}
+.bsm{font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#9ca3af;cursor:pointer;font-family:inherit;transition:all .2s}.bsm:hover{color:#fff;background:rgba(255,255,255,.09)}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.07);padding:18px 10px}
+.ssec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#374151;padding:0 10px;margin:18px 0 6px}.ssec:first-child{margin-top:0}
+.slink{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;transition:all .2s;border:none;background:none;width:100%;font-family:inherit;text-align:left}
+.slink:hover{background:rgba(255,255,255,.05);color:#e0e0e0}.slink.act{background:rgba(255,255,255,.08);color:#fff;font-weight:600}
+.content{padding:32px;overflow:auto}
+.pv{display:none}.pv.act{display:block}
+.ph{margin-bottom:24px}.ph h1{font-family:'Geist','Inter',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}.ph p{color:#4b5563;font-size:13px}
+.srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:28px}
+.sc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px}
+.scv{font-family:'Geist','Inter',sans-serif;font-size:30px;font-weight:800;margin-bottom:4px}
+.scl{font-size:11px;color:#4b5563;font-weight:500}
+.prog-bar{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-top:8px}
+.prog-fill{height:100%;background:#e0e0e0;border-radius:3px;transition:width .5s}
+.prog-fill.over{background:#f87171}
+.stable{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
+.stable-head{display:grid;grid-template-columns:1fr 120px 120px 120px;gap:0;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.07);padding:10px 16px}
+.stable-head span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#374151}
+.srow2{display:grid;grid-template-columns:1fr 120px 120px 120px;gap:0;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);align-items:center}
+.srow2:last-child{border-bottom:none}.srow2:hover{background:rgba(255,255,255,.02)}
+.su{display:flex;align-items:center;gap:10px}
+.su img{width:32px;height:32px;border-radius:50%;object-fit:cover;background:#1a1c24;flex-shrink:0}
+.sun{font-size:13px;font-weight:700}.sur{font-size:11px;color:#4b5563}
+.sess-list{display:flex;flex-direction:column;gap:8px}
+.sess-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.sess-game{font-size:13px;font-weight:600}.sess-dur{font-size:12px;color:#4b5563}.sess-time{font-size:11px;color:#374151}
+input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;font-size:14px;color:#f9fafb;font-family:inherit;outline:none;transition:border-color .2s;margin-bottom:10px}
+input:focus{border-color:rgba(255,255,255,.3)}input::placeholder{color:#374151}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;padding:11px 20px;border-radius:9px;transition:all .2s;cursor:pointer;border:none;font-family:inherit}
+.bw{background:#e0e0e0;color:#08090d}.bw:hover{background:#fff}
+.toast{position:fixed;bottom:24px;right:24px;background:#1a1c24;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 18px;font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all .35s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}.toast.ok{border-color:rgba(220,220,220,.3);color:#e0e0e0}.toast.fail{border-color:rgba(239,68,68,.4);color:#f87171}
+@media(max-width:768px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+</style>
+</head>
+<body>
+<div id="login-screen">
+  <div class="lcard">
+    <div class="logo"><img src="/images/logo-leaf.png" alt=""><span>STAFF PORTAL</span></div>
+    <h2 style="font-family:'Geist','Inter',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px">Parkside Staff</h2>
+    <p style="color:#4b5563;font-size:13px;margin-bottom:28px;line-height:1.6">Sign in with Discord to access your activity, quotas, and shift data. Management rank required.</p>
+    <a href="#" id="disc-btn" class="bdisc">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.08.118 18.1.135 18.112a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Continue with Discord
+    </a>
+    <p style="margin-top:16px;font-size:11px;color:#374151">Requires Management+ rank in the Roblox group.</p>
+  </div>
+</div>
+
+<div id="portal">
+  <div class="topbar">
+    <div class="tbrand"><img src="/images/logo-leaf.png" alt=""><span>STAFF PORTAL</span></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span id="top-name" style="font-size:13px;font-weight:600;color:#9ca3af"></span>
+      <a href="https://parksidestore.cc" class="bsm">Main Site</a>
+      <button class="bsm" onclick="logout()">Sign out</button>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="ssec">My Portal</div>
+      <button class="slink act" data-p="my-activity"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>My Activity</button>
+      <button class="slink" data-p="my-quota"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>My Quota</button>
+      <div class="ssec" id="mgmt-section" style="display:none">Management</div>
+      <button class="slink" data-p="all-activity" id="all-act-btn" style="display:none"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>All Staff Activity</button>
+      <button class="slink" data-p="quotas" id="quota-mgmt-btn" style="display:none"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>Set Quotas</button>
+      <button class="slink" data-p="applications" id="apps-btn" style="display:none"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>Applications</button>
+    </div>
+    <div class="content">
+      <div class="pv act" id="pv-my-activity">
+        <div class="ph"><h1>My Activity</h1><p>Your in-game time tracked this week.</p></div>
+        <div class="srow" id="my-stats"></div>
+        <div style="font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">Recent Sessions</div>
+        <div class="sess-list" id="my-sessions"><div style="color:#374151;font-size:13px">Loading...</div></div>
+      </div>
+      <div class="pv" id="pv-my-quota">
+        <div class="ph"><h1>My Quota</h1><p>Your weekly activity requirement set by Staffing Officers.</p></div>
+        <div id="my-quota-content"></div>
+      </div>
+      <div class="pv" id="pv-all-activity">
+        <div class="ph"><h1>All Staff Activity</h1><p>Weekly activity summary for all tracked staff members.</p></div>
+        <div class="stable">
+          <div class="stable-head"><span>Staff Member</span><span>This Week</span><span>Quota</span><span>Progress</span></div>
+          <div id="all-act-body"><div style="color:#374151;font-size:13px;text-align:center;padding:32px">Loading...</div></div>
+        </div>
+      </div>
+      <div class="pv" id="pv-quotas">
+        <div class="ph"><h1>Set Quotas</h1><p>Assign weekly hour requirements to staff members. (Staffing Officer+)</p></div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px;max-width:480px">
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <label style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.06em">Roblox User ID</label>
+            <input id="q-id" placeholder="e.g. 123456789">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <label style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.06em">Roblox Username</label>
+            <input id="q-name" placeholder="e.g. ParkUser123">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+            <label style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.06em">Weekly Hours Required</label>
+            <input id="q-hours" type="number" placeholder="e.g. 3" min="0" max="40">
+          </div>
+          <button class="btn bw" id="q-btn" style="width:100%;padding:12px">Set Quota</button>
+        </div>
+      </div>
+      <div class="pv" id="pv-applications">
+        <div class="ph"><h1>Applications</h1><p>All submitted applications for open positions.</p></div>
+        <div id="apps-list"><div style="color:#374151;font-size:13px;text-align:center;padding:40px">Loading...</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SITE='https://parksidestore.cc';
+let user=null;
+
+document.getElementById('disc-btn').href=`https://discord.com/oauth2/authorize?client_id=1556322821154807908&redirect_uri=${encodeURIComponent(SITE+'/auth/callback')}&response_type=code&scope=identify&state=${encodeURIComponent(location.href)}`;
+
+function toast(msg,ok=true){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+(ok?'ok':'fail');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+function fmtTime(s){if(!s)return'0h 0m';const h=Math.floor(s/3600);const m=Math.floor((s%3600)/60);return`${h}h ${m}m`;}
+function timeAgo(ts){const d=Date.now()/1000-ts;if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago';}
+
+function sp(p){document.querySelectorAll('.slink[data-p]').forEach(b=>b.classList.toggle('act',b.dataset.p===p));document.querySelectorAll('.pv').forEach(v=>v.classList.toggle('act',v.id==='pv-'+p));if(p==='all-activity')loadAllActivity();if(p==='applications')loadApplications();}
+document.querySelectorAll('.slink[data-p]').forEach(b=>b.addEventListener('click',()=>sp(b.dataset.p)));
+
+async function init(){
+  const me=await fetch(SITE+'/api/me').then(r=>r.json()).catch(()=>({user:null}));
+  user=me.user;
+  if(!user){document.getElementById('login-screen').style.display='flex';return;}
+  // Minimum rank 25 (Management equivalent)
+  if(user.group_rank<25){document.getElementById('login-screen').innerHTML=`<div class="lcard"><div class="logo"><img src="/images/logo-leaf.png" alt=""><span>STAFF PORTAL</span></div><h2 style="font-family:'Geist','Inter',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px">Access Denied</h2><p style="color:#4b5563;font-size:13px;margin-bottom:20px">You need Management+ rank to access the staff portal.</p><a href="https://parksidestore.cc" style="color:#e0e0e0;font-size:13px">Back to site</a></div>`;return;}
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('portal').style.display='flex';
+  document.getElementById('top-name').textContent=user.discord_name+(user.group_role?' · '+user.group_role:'');
+  // Show management sections for rank 100+
+  if(user.group_rank>=100){
+    document.getElementById('mgmt-section').style.display='block';
+    document.getElementById('all-act-btn').style.display='flex';
+    document.getElementById('apps-btn').style.display='flex';
+  }
+  if(user.group_rank>=170){document.getElementById('quota-mgmt-btn').style.display='flex';}
+  loadMyActivity();
+}
+
+async function loadMyActivity(){
+  if(!user?.roblox_id){document.getElementById('my-stats').innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1">Roblox account not linked via Bloxlink. Ask an admin to link your account.</div>';return;}
+  const d=await fetch(SITE+'/api/activity?roblox_id='+user.roblox_id).then(r=>r.json()).catch(()=>({}));
+  const ws=d.weekly_seconds||0;const qs=d.quota?.weekly_seconds||0;const pct=qs?Math.min(Math.round(ws/qs*100),100):null;
+  document.getElementById('my-stats').innerHTML=`
+    <div class="sc"><div class="scv">${fmtTime(ws)}</div><div class="scl">This Week</div>${qs?`<div class="prog-bar"><div class="prog-fill${ws>qs?' over':''}" style="width:${pct}%"></div></div><div style="font-size:11px;color:#374151;margin-top:4px">${pct}% of quota</div>`:'<div style="font-size:11px;color:#374151;margin-top:4px">No quota set</div>'}</div>
+    <div class="sc"><div class="scv">${(d.sessions||[]).length}</div><div class="scl">Sessions This Week</div></div>
+    <div class="sc"><div class="scv">${qs?fmtTime(qs):'None'}</div><div class="scl">Weekly Quota</div></div>`;
+  const sess=document.getElementById('my-sessions');
+  if(!(d.sessions||[]).length){sess.innerHTML='<div style="color:#374151;font-size:13px">No sessions recorded yet. Make sure the game script is installed and running.</div>';return;}
+  sess.innerHTML=d.sessions.map(s=>`<div class="sess-card"><div><div class="sess-game">Game ID ${s.game_id||'Unknown'}</div><div class="sess-time">${timeAgo(s.join_time)}</div></div><div class="sess-dur">${fmtTime(s.duration_seconds)}</div></div>`).join('');
+  // Quota tab
+  const qc=document.getElementById('my-quota-content');
+  if(d.quota){qc.innerHTML=`<div class="sc" style="max-width:300px"><div class="scv">${fmtTime(qs)}</div><div class="scl">Required per week</div><div style="margin-top:12px;font-size:12px;color:#374151">Set by ${esc(d.quota.set_by||'System')}</div></div>`;}
+  else{qc.innerHTML='<div style="color:#374151;font-size:13px">No quota assigned yet.</div>';}
+}
+
+async function loadAllActivity(){
+  const d=await fetch(SITE+'/api/activity').then(r=>r.json()).catch(()=>({staff:[]}));
+  const staff=d.staff||[];
+  const body=document.getElementById('all-act-body');
+  if(!staff.length){body.innerHTML='<div style="color:#374151;font-size:13px;text-align:center;padding:32px">No activity recorded yet.</div>';return;}
+  body.innerHTML=staff.map(s=>{
+    const pct=s.quota_seconds?Math.min(Math.round(s.weekly_seconds/s.quota_seconds*100),100):null;
+    return`<div class="srow2"><div class="su"><div><div class="sun">${esc(s.roblox_name)}</div><div class="sur">ID ${s.roblox_id}</div></div></div><div style="font-size:13px;font-weight:600">${fmtTime(s.weekly_seconds)}</div><div style="font-size:13px;color:#4b5563">${s.quota_seconds?fmtTime(s.quota_seconds):'None'}</div><div style="width:100px">${pct!==null?`<div class="prog-bar"><div class="prog-fill${s.weekly_seconds>s.quota_seconds?' over':''}" style="width:${pct}%"></div></div><div style="font-size:10px;color:#374151;margin-top:3px">${pct}%</div>`:'<span style="font-size:11px;color:#374151">No quota</span>'}</div></div>`;
+  }).join('');
+}
+
+async function loadApplications(){
+  const d=await fetch(SITE+'/api/applications').then(r=>r.json()).catch(()=>({applications:[]}));
+  const apps=d.applications||[];
+  const list=document.getElementById('apps-list');
+  if(!apps.length){list.innerHTML='<div style="color:#374151;font-size:13px;text-align:center;padding:40px">No applications yet.</div>';return;}
+  list.innerHTML=apps.map(a=>{
+    let ans={};try{ans=JSON.parse(a.answers||'{}');}catch{}
+    const ansHtml=Object.entries(ans).slice(0,3).map(([q,v])=>`<div style="margin-top:8px"><div style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase">${esc(q)}</div><div style="font-size:13px;color:#e5e7eb;margin-top:2px">${esc(v)}</div></div>`).join('');
+    const sc=a.status==='accepted'?'color:#4ade80':a.status==='rejected'?'color:#f87171':'color:#fbbf24';
+    return`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;margin-bottom:12px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px">
+        <div><div style="font-size:14px;font-weight:700">${esc(a.discord_name)}</div><div style="font-size:12px;color:#4b5563">Roblox: ${esc(a.roblox_name||'Not linked')} · Job ID ${a.job_id} · ${timeAgo(a.created_at)}</div></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;${sc}">${a.status}</span>
+          ${a.status==='pending'?`<button onclick="reviewApp(${a.id},'accepted')" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#4ade80;font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:inherit">Accept</button><button onclick="reviewApp(${a.id},'rejected')" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:inherit">Reject</button>`:''}
+        </div>
+      </div>${ansHtml}</div>`;
+  }).join('');
+}
+
+async function reviewApp(id,status){
+  const r=await fetch(SITE+'/api/applications',{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({id,status})});
+  if(r.ok){toast('Updated to '+status);loadApplications();}else toast('Failed',false);
+}
+
+document.getElementById('q-btn').onclick=async()=>{
+  const roblox_id=+document.getElementById('q-id').value;
+  const roblox_name=document.getElementById('q-name').value.trim();
+  const hours=+document.getElementById('q-hours').value;
+  if(!roblox_id||!hours){toast('Fill in all fields',false);return;}
+  const r=await fetch(SITE+'/api/quotas',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({roblox_id,roblox_name,weekly_seconds:hours*3600})});
+  if(r.ok){toast('Quota set for '+roblox_name);document.getElementById('q-id').value='';document.getElementById('q-name').value='';document.getElementById('q-hours').value='';}
+  else{const d=await r.json();toast(d.error||'Failed',false);}
+};
+
+async function logout(){await fetch(SITE+'/api/me',{method:'DELETE'});location.href=SITE;}
+
+init();
+</script>
+</body></html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Staff | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,9,13,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.nl{display:flex;align-items:center;gap:10px;text-decoration:none}.nl img{width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1)}.nl span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.05em}
+.nlinks a{color:#6b7280;font-size:13px;font-weight:500;text-decoration:none;margin-left:26px;transition:color .2s}.nlinks a:hover,.nlinks a.act{color:#fff;font-weight:600}
+.btn{display:inline-flex;align-items:center;font-weight:700;font-size:13px;padding:9px 20px;border-radius:9px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:inherit}
+.bw{background:#e0e0e0;color:#08090d}.bw:hover{background:#fff}
+.banner{position:relative;height:200px;overflow:hidden}.banner img{width:100%;height:100%;object-fit:cover;display:block}.bov{position:absolute;inset:0;background:linear-gradient(to top,#08090d,rgba(8,9,13,.45) 60%,transparent)}
+.bc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:28px;text-align:center}
+.tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:4px;width:fit-content}
+.tab{padding:8px 20px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:#6b7280;background:none;border:none;font-family:inherit}.tab.act{background:rgba(255,255,255,.09);color:#fff}
+main{max-width:1100px;margin:0 auto;padding:36px 32px 80px}
+.controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px}
+.search{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:9px 16px;font-size:13px;color:#f9fafb;font-family:inherit;outline:none;width:240px;transition:border-color .2s}.search:focus{border-color:rgba(255,255,255,.25)}.search::placeholder{color:#374151}
+.sync-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:#4b5563;margin-bottom:20px}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:#6b7280;flex-shrink:0;animation:bl 1.4s ease infinite}
+.sync-dot.live{background:#e0e0e0;animation:none}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px}
+.sc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 14px;text-align:center;transition:all .25s;text-decoration:none;color:inherit;display:block}
+.sc:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);transform:translateY(-3px)}
+.sc img{width:60px;height:60px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block;background:#1a1c24;border:2px solid rgba(255,255,255,.08)}
+.scn{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scr{font-size:11px;color:#4b5563}
+.sct{margin-top:7px;display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#9ca3af}
+.dhead{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.dl{flex:1;height:1px;background:rgba(255,255,255,.07)}
+.dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4b5563;white-space:nowrap}
+.dc{background:rgba(255,255,255,.06);border-radius:5px;padding:2px 8px;font-size:10px;font-weight:700;color:#6b7280}
+.rtable{width:100%;border-collapse:collapse}
+.rtable th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#374151;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
+.rtable td{padding:10px 14px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+.rtable tr:last-child td{border-bottom:none}.rtable tr:hover td{background:rgba(255,255,255,.02)}
+.pill{display:inline-block;padding:3px 10px;border-radius:5px;font-size:10px;font-weight:700}
+.expbtn{color:#374151;font-size:11px;cursor:pointer;background:none;border:none;font-family:inherit;transition:color .2s;padding:2px 0;margin-top:3px}.expbtn:hover{color:#9ca3af}
+.chips{display:none;margin-top:6px;flex-wrap:wrap;gap:4px}
+.chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:2px 8px;font-size:11px;color:#6b7280}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:24px 32px;text-align:center;font-size:12px;color:#374151}
+</style>
+
+<style id="notif-css">
+#notif-bar{display:none;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1);padding:10px 32px;text-align:center;font-size:13px;font-weight:500;position:relative}
+#notif-bar.info{background:rgba(255,255,255,.06)}
+#notif-bar.warning{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.2);color:#fbbf24}
+#notif-bar.alert{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#f87171}
+#notif-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;cursor:pointer;font-size:16px;opacity:.6}
+#notif-close:hover{opacity:1}
+</style></head>
+<body>
+<nav>
+  <a href="/" class="nl"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE STORES</span></a>
+  <div class="nlinks"><a href="/">Home</a><a href="/staff" class="act">Staff</a><a href="/ranks">Ranks</a><a href="/servers">Servers</a><a href="/careers">Careers</a><a href="/status">Status</a></div>
+  <a href="https://www.roblox.com/communities/993201720/Parkside-Stores-Limited" class="btn bw">Join Group</a>
+</nav><div id="notif-bar"><span id="notif-msg"></span><button id="notif-close" onclick="document.getElementById('notif-bar').style.display='none'">×</button></div>
+<div class="banner">
+  <img id="bimg" src="" alt="">
+  <div class="bov"></div>
+  <div class="bc">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">Our People</div>
+    <h1 style="font-family:'Geist','Inter',sans-serif;font-size:clamp(24px,5vw,46px);font-weight:900;letter-spacing:-.02em">Parkside Staff</h1>
+  </div>
+</div>
+<main>
+  <div class="controls">
+    <div class="tabs">
+      <button class="tab act" data-tab="departments">Departments</button>
+      <button class="tab" data-tab="leadership">Leadership</button>
+      <button class="tab" data-tab="all">All Ranks</button>
+    </div>
+    <input class="search" id="search" placeholder="Search by name...">
+  </div>
+  <div class="sync-bar"><span class="sync-dot" id="sdot"></span><span id="smsg">Loading live data from Roblox...</span></div>
+  <div id="tab-departments"><div id="dept-root"><div style="color:#374151;font-size:13px;padding:40px 0;text-align:center">Loading...</div></div></div>
+  <div id="tab-leadership" style="display:none">
+    <div class="sgrid" id="lead-grid"><div style="color:#374151;font-size:13px;padding:40px 0;text-align:center;grid-column:1/-1">Loading...</div></div>
+  </div>
+  <div id="tab-all" style="display:none">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
+      <table class="rtable"><thead><tr><th>Rank</th><th>Category</th><th>Members</th></tr></thead><tbody id="rtbody"><tr><td colspan="3" style="text-align:center;color:#374151;padding:32px">Loading...</td></tr></tbody></table>
+    </div>
+  </div>
+</main>
+<footer>© 2026 Parkside Stores · <a href="/" style="color:#374151;text-decoration:none">Home</a></footer>
+<script>
+const photos=['/images/store.png','/images/cafe.png','/images/bg.png'];
+document.getElementById('bimg').src=photos[Math.floor(Math.random()*photos.length)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const G=993201720;
+const CATS={'Group Holder':'Executive Leadership','Store Director':'Executive Leadership','Vice Director':'Executive Leadership','Operations Officer':'Executive Management','Staffing Officer':'Executive Management','Development Officer':'Executive Management','Development Team':'Development Team','Board Of Directors':'Directorship Management','Junior Director':'Directorship Management','Intern Director':'Directorship Management','Head Corporate':'Senior Management','Senior Corporate':'Senior Management','Junior Corporate':'Senior Management','Intern Corporate':'Senior Management','Booster Manager':'Management Team','Regional Manager':'Management Team','Store Manager':'Management Team','Assistant Manager':'Management Team','Store Supervisor':'Management Team','Lead Store Security':'Store Security Team','Senior Store Security':'Store Security Team','Junior Store Security':'Store Security Team','Lead Store Colleague':'Store Colleague Team','Senior Store Colleague':'Store Colleague Team','Junior Store Colleague':'Store Colleague Team','Trainee':'Normal Roles','Noted Customer':'Normal Roles','myParkside Members':'Normal Roles'};
+const COLS={'Executive Leadership':'#c084fc','Executive Management':'#f472b6','Development Team':'#f87171','Directorship Management':'#818cf8','Senior Management':'#60a5fa','Management Team':'#34d399','Store Security Team':'#fbbf24','Store Colleague Team':'#fb923c','Normal Roles':'#94a3b8'};
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('act'));t.classList.add('act');
+  ['departments','leadership','all'].forEach(n=>document.getElementById('tab-'+n).style.display=n===t.dataset.tab?'block':'none');
+}));
+document.getElementById('search').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase();
+  document.querySelectorAll('.sc').forEach(c=>c.style.display=c.dataset.name?.toLowerCase().includes(q)?'block':'none');
+});
+
+const card=(p,cat)=>`<a href="https://www.roblox.com/users/${+p.id}/profile" target="_blank" rel="noopener" class="sc" data-name="${esc(p.name)}">
+  <img src="${esc(p.avatar||'')}" alt="" onerror="this.style.visibility='hidden'">
+  <div class="scn">${esc(p.name)}</div><div class="scr">${esc(p.rank)}</div>
+  ${cat?`<span class="sct" style="background:${COLS[cat]||'#6b7280'}18;border-color:${COLS[cat]||'#6b7280'}30;color:${COLS[cat]||'#9ca3af'}">${esc(cat)}</span>`:''}
+</a>`;
+
+async function loadDepts(){
+  const r=await fetch('/api/departments').then(x=>x.json()).catch(()=>({people:[]}));
+  const root=document.getElementById('dept-root');
+  const p=r.people||[];
+  if(!p.length){root.innerHTML='<div style="color:#374151;font-size:13px;padding:40px 0;text-align:center">No departments configured yet.</div>';return;}
+  const by={};p.forEach(x=>(by[x.department]||=[]).push(x));
+  root.innerHTML=Object.entries(by).map(([dept,ps])=>`
+    <div style="margin-bottom:48px">
+      <div class="dhead"><div class="dl"></div><div class="dt">${esc(dept)}</div><div class="dc">${ps.length}</div><div class="dl"></div></div>
+      <div class="sgrid">${ps.map(x=>card(x,null)).join('')}</div>
+    </div>`).join('');
+}
+
+async function loadLeadership(){
+  const r=await fetch('/api/staff').then(x=>x.json()).catch(()=>({staff:[]}));
+  const grid=document.getElementById('lead-grid');
+  const s=r.staff||[];
+  grid.innerHTML=s.length?s.map(p=>card(p,CATS[p.rank])):'<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">Unavailable right now.</div>';
+}
+
+let roleMap={};
+async function loadAllRanks(){
+  const tbody=document.getElementById('rtbody');
+  try{
+    const rd=await fetch(`https://groups.roproxy.com/v1/groups/${G}/roles`).then(r=>r.json());
+    const sorted=[...rd.roles].sort((a,b)=>b.rank-a.rank);
+    roleMap={};sorted.forEach(r=>roleMap[r.name]=r);
+    let t=0;
+    tbody.innerHTML=sorted.map(r=>{
+      const cat=CATS[r.name]||'Other';const col=COLS[cat]||'#6b7280';const mid='m'+(t++);
+      return`<tr>
+        <td><div style="font-weight:700;font-size:13px;color:#e5e7eb">${esc(r.name)}</div>
+        <div class="chips" id="${mid}"></div>
+        <button class="expbtn" data-rid="${r.id}" data-mid="${mid}" onclick="toggleM(this)">Load members</button></td>
+        <td><span class="pill" style="background:${col}15;color:${col}">${esc(cat)}</span></td>
+        <td style="color:#4b5563" id="cnt-${r.id}">...</td>
+      </tr>`;
+    }).join('');
+    sorted.forEach(r=>{
+      fetch(`https://groups.roproxy.com/v1/groups/${G}/roles/${r.id}/users?limit=1`).then(x=>x.json()).then(d=>{
+        const el=document.getElementById('cnt-'+r.id);
+        if(el)el.textContent=(d.total||0).toLocaleString()+' members';
+      }).catch(()=>{});
+    });
+  }catch{tbody.innerHTML='<tr><td colspan="3" style="text-align:center;color:#374151;padding:32px">Failed to load. Try refreshing.</td></tr>';}
+}
+
+async function toggleM(btn){
+  const mid=btn.dataset.mid,rid=btn.dataset.rid;
+  const box=document.getElementById(mid);
+  if(box.style.display==='flex'){box.style.display='none';btn.textContent='Load members';return;}
+  btn.textContent='Loading...';
+  try{
+    const d=await fetch(`https://groups.roproxy.com/v1/groups/${G}/roles/${rid}/users?limit=100`).then(r=>r.json());
+    const names=d.data?.map(u=>u.username)||[];
+    box.innerHTML=names.length?names.map(n=>`<span class="chip">${esc(n)}</span>`).join(''):'<span style="color:#374151;font-size:11px">No members</span>';
+    box.style.display='flex';btn.textContent='Hide members';
+  }catch{btn.textContent='Failed';}
+}
+
+function setSyncStatus(ok){
+  const dot=document.getElementById('sdot');const msg=document.getElementById('smsg');
+  dot.className='sync-dot'+(ok?' live':'');
+  msg.textContent=ok?'Live — updates every 60 seconds':'Could not sync. Retrying...';
+}
+
+async function loadAll(){
+  try{
+    await Promise.all([loadDepts(),loadLeadership(),loadAllRanks()]);
+    setSyncStatus(true);
+  }catch{setSyncStatus(false);}
+}
+
+loadAll();
+setInterval(()=>{loadDepts();loadLeadership();setSyncStatus(true);},60000);
+</script>
+
+<script id="notif-js">
+(async()=>{try{const d=await fetch('/api/notifications').then(r=>r.json());const n=(d.notifications||[])[0];if(n){const bar=document.getElementById('notif-bar');bar.className=n.type||'info';document.getElementById('notif-msg').textContent=n.message;bar.style.display='block';}}catch{}})();
+</script></body></html>

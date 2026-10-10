@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Status | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,9,13,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.nl{display:flex;align-items:center;gap:10px;text-decoration:none}.nl img{width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1)}.nl span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.05em}
+.nlinks a{color:#6b7280;font-size:13px;text-decoration:none;margin-left:26px;transition:color .2s}.nlinks a:hover{color:#fff}
+main{max-width:720px;margin:0 auto;padding:48px 32px 80px}
+.status-hero{text-align:center;padding:48px 0 40px}
+.status-hero h1{font-family:'Geist','Inter',sans-serif;font-size:clamp(24px,5vw,42px);font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
+.status-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;font-size:13px;font-weight:700;margin-bottom:16px}
+.s-ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#4ade80}
+.s-issue{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);color:#fbbf24}
+.s-major{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.systems{display:grid;gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:32px}
+.sys-row{background:#08090d;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.sys-name{font-size:14px;font-weight:600}
+.sys-st{font-size:12px;font-weight:700}
+.st-ok{color:#4ade80}.st-deg{color:#fbbf24}.st-down{color:#f87171}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#374151;margin-bottom:16px}
+.incident{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;margin-bottom:12px}
+.inc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.inc-title{font-size:15px;font-weight:700}
+.sev-pill{font-size:10px;font-weight:700;padding:3px 10px;border-radius:5px;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.sev-minor{background:rgba(251,191,36,.15);color:#fbbf24}
+.sev-major{background:rgba(249,115,22,.15);color:#fb923c}
+.sev-critical{background:rgba(239,68,68,.15);color:#f87171}
+.sev-resolved{background:rgba(34,197,94,.1);color:#4ade80}
+.inc-desc{font-size:13px;color:#4b5563;line-height:1.6;margin-bottom:8px}
+.inc-time{font-size:11px;color:#374151}
+.no-incidents{text-align:center;padding:40px;color:#374151;font-size:14px}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:24px 32px;text-align:center;font-size:12px;color:#374151}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nl"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE STORES</span></a>
+  <div class="nlinks"><a href="/">Home</a><a href="/staff">Staff</a><a href="/careers">Careers</a><a href="/status">Status</a></div>
+  <a href="https://discord.gg/ceAmhWdhda" style="font-size:13px;color:#6b7280;text-decoration:none">Discord</a>
+</nav>
+<main>
+  <div class="status-hero">
+    <div class="status-badge s-ok" id="overall-badge"><span class="dot"></span><span id="overall-text">Checking status...</span></div>
+    <h1>System Status</h1>
+    <p style="color:#4b5563;font-size:14px">Live status for all Parkside Stores services.</p>
+  </div>
+  <div class="systems">
+    <div class="sys-row"><span class="sys-name">Website</span><span class="sys-st st-ok">Operational</span></div>
+    <div class="sys-row"><span class="sys-name">Roblox Games</span><span class="sys-st st-ok" id="sys-games">Checking...</span></div>
+    <div class="sys-row"><span class="sys-name">Discord Bot</span><span class="sys-st st-ok">Operational</span></div>
+    <div class="sys-row"><span class="sys-name">Staff Portal</span><span class="sys-st st-ok">Operational</span></div>
+  </div>
+  <div class="section-title">Incidents</div>
+  <div id="incidents-root"><div class="no-incidents">Loading...</div></div>
+</main>
+<footer>© 2026 Parkside Stores · <a href="/" style="color:#374151;text-decoration:none">Home</a></footer>
+<script>
+function timeAgo(ts){const d=Date.now()/1000-ts;if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago';}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function load(){
+  const[si,gd]=await Promise.all([
+    fetch('/api/status').then(r=>r.json()).catch(()=>({incidents:[]})),
+    fetch('/api/games').then(r=>r.json()).catch(()=>({games:[]}))
+  ]);
+  const incidents=si.incidents||[];
+  const active=incidents.filter(i=>!i.resolved);
+  const badge=document.getElementById('overall-badge');
+  const txt=document.getElementById('overall-text');
+  if(!active.length){badge.className='status-badge s-ok';txt.textContent='All Systems Operational';}
+  else if(active.some(i=>i.severity==='critical')){badge.className='status-badge s-major';txt.textContent='Major Outage';}
+  else{badge.className='status-badge s-issue';txt.textContent='Degraded Performance';}
+
+  const total=(gd.games||[]).reduce((a,x)=>a+(x.playing||0),0);
+  document.getElementById('sys-games').textContent=total>0?total+' players online':'Operational';
+
+  const root=document.getElementById('incidents-root');
+  if(!incidents.length){root.innerHTML='<div class="no-incidents">No incidents reported. All systems are running smoothly.</div>';return;}
+  root.innerHTML=incidents.map(i=>{
+    const sc=i.resolved?'sev-resolved':i.severity==='critical'?'sev-critical':i.severity==='major'?'sev-major':'sev-minor';
+    const sl=i.resolved?'Resolved':i.severity.charAt(0).toUpperCase()+i.severity.slice(1);
+    return`<div class="incident"><div class="inc-head"><div class="inc-title">${esc(i.title)}</div><span class="sev-pill ${sc}">${sl}</span></div><div class="inc-desc">${esc(i.description||'')}</div><div class="inc-time">${timeAgo(i.created_at)} · Posted by ${esc(i.posted_by||'System')}${i.resolved?` · Resolved ${timeAgo(i.resolved_at)}`:''}`;
+  }).join('');
+}
+load();setInterval(load,60000);
+</script>
+</body></html>

@@ -1,0 +1,39 @@
+=== DNS RECORDS FOR EMAIL SENDING (MailChannels + Purelymail) ===
+
+Add these records in Cloudflare DNS for parksidestore.cc:
+
+1. Allow MailChannels to send on your behalf (SPF):
+   Type:  TXT
+   Name:  @
+   Value: v=spf1 include:relay.mailchannels.net include:purelymail.com ~all
+   (If you already have an SPF record, merge them - only one SPF record allowed)
+
+2. MailChannels Domain Lockdown (prevents spoofing):
+   Type:  TXT
+   Name:  _mailchannels
+   Value: v=mc1 cfid=parksidestore.cc
+
+3. DMARC (tells receivers what to do with failed emails):
+   Type:  TXT
+   Name:  _dmarc
+   Value: v=DMARC1; p=none; rua=mailto:noreply@parksidestore.cc
+
+These three records let noreply@parksidestore.cc send emails
+through Cloudflare Pages (MailChannels) for free.
+
+=== HOW EMAIL IS USED IN THE SITE ===
+
+- When someone applies for a job → Discord DM confirmation sent instantly
+- When application is accepted/rejected → Discord DM notification sent
+- The noreply@parksidestore.cc address is shown as the sender
+
+=== PURELYMAIL SMTP (optional, for external email clients) ===
+
+If you want to READ emails sent TO noreply@parksidestore.cc
+in an email client (Outlook, etc.):
+
+  Incoming (IMAP):  imap.purelymail.com  port 993  SSL
+  Outgoing (SMTP):  smtp.purelymail.com  port 465   SSL
+  Username:         noreply@parksidestore.cc
+  Password:         (the password you set in Purelymail)
+

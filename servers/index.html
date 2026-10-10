@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Servers | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,9,13,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.nl{display:flex;align-items:center;gap:10px;text-decoration:none}.nl img{width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1)}.nl span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.05em}
+.back{color:#6b7280;font-size:13px;text-decoration:none;transition:color .2s}.back:hover{color:#fff}
+main{flex:1;max-width:1100px;margin:0 auto;padding:40px 32px;width:100%}
+.pt{font-family:'Geist','Inter',sans-serif;font-size:26px;font-weight:900;margin-bottom:4px;letter-spacing:-.01em}
+.gtabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.gtab{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:#6b7280;font-family:inherit;display:flex;align-items:center;gap:8px}
+.gtab.act{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.15);color:#fff}
+.gtab:hover:not(.act){background:rgba(255,255,255,.06);color:#e0e0e0}
+.gtab img{width:28px;height:28px;border-radius:6px;object-fit:cover;background:#111;flex-shrink:0}
+.gtab .pc{font-size:10px;font-weight:700;color:#9ca3af;margin-left:4px}
+.gview{display:none}.gview.act{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+@media(max-width:768px){.gview.act{grid-template-columns:1fr}}
+.slist{display:flex;flex-direction:column;gap:8px}
+.scard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:14px 18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between}
+.scard:hover,.scard.sel{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.07)}
+.sid{font-family:monospace;font-size:11px;color:#6b7280;margin-bottom:3px}.sc{font-size:13px;font-weight:600}
+.stag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#e0e0e0;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-left:8px}
+.detail{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;position:sticky;top:78px}
+.dtop{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);padding:16px 20px}
+.dlabel{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:4px}
+.did{font-family:monospace;font-size:11px;color:#4b5563;word-break:break-all}
+.dbody{padding:18px 20px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 24px;text-align:center;color:#374151}
+.tl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#374151;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.tl::before{content:'';width:4px;height:4px;border-radius:50%;background:#9ca3af}
+.pchip{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:4px 9px;font-size:11px;color:#6b7280;margin:3px;display:inline-block}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:22px 32px;text-align:center;font-size:12px;color:#374151}
+.blink{width:6px;height:6px;border-radius:50%;background:#e0e0e0;display:inline-block;animation:bl 1.2s ease infinite;margin-right:6px;vertical-align:middle}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+</style>
+
+<style id="notif-css">
+#notif-bar{display:none;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1);padding:10px 32px;text-align:center;font-size:13px;font-weight:500;position:relative}
+#notif-bar.info{background:rgba(255,255,255,.06)}
+#notif-bar.warning{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.2);color:#fbbf24}
+#notif-bar.alert{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#f87171}
+#notif-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;cursor:pointer;font-size:16px;opacity:.6}
+#notif-close:hover{opacity:1}
+</style></head>
+<body>
+<nav>
+  <a href="/" class="nl"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE STORES</span></a>
+  <a href="/" class="back">Home</a>
+</nav><div id="notif-bar"><span id="notif-msg"></span><button id="notif-close" onclick="document.getElementById('notif-bar').style.display='none'">×</button></div>
+<main>
+  <h1 class="pt"><span class="blink"></span>Live Servers</h1>
+  <p style="color:#4b5563;font-size:13px;margin-bottom:24px">Select a game to view active servers. Updates every 30 seconds.</p>
+  <div class="gtabs" id="gtabs"><div style="color:#374151;font-size:13px">Loading games...</div></div>
+  <div id="gviews"></div>
+</main>
+<footer>© 2026 Parkside Stores</footer>
+<script>
+const SBK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1a3Jkb2JwcW5mZWxseHhleXh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyNDEyMDUsImV4cCI6MjEwMjgxNzIwNX0.anh0lWDFEBcjG2J_dcX53JE14BoTVpy2waOlcopinug';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let games=[];
+async function init(){
+  try{const{games:g}=await fetch('/api/games').then(r=>r.json());games=g||[];render();}
+  catch{document.getElementById('gtabs').innerHTML='<div style="color:#374151;font-size:13px">Failed to load games.</div>';}
+}
+function render(){
+  const tabs=document.getElementById('gtabs');const views=document.getElementById('gviews');
+  if(!games.length){tabs.innerHTML='<div style="color:#374151;font-size:13px">No games tracked yet. Add some in the admin panel.</div>';return;}
+  tabs.innerHTML=games.map((g,i)=>`<button class="gtab${i===0?' act':''}" data-i="${i}" onclick="sw(${i})">${g.thumb?`<img src="${esc(g.thumb)}" alt="">`:''}${esc(g.name)}<span class="pc">${(g.playing||0).toLocaleString()} online</span></button>`).join('');
+  views.innerHTML=games.map((g,i)=>`<div class="gview${i===0?' act':''}" id="gv-${i}">
+    <div><div class="slist" id="sl-${i}"><div style="color:#374151;font-size:13px;padding:20px 0">Loading...</div></div></div>
+    <div>
+      <div class="detail" id="de-${i}"><div class="empty"><div style="font-size:13px;font-weight:600">Select a server</div><div style="font-size:12px;margin-top:4px">to view details</div></div></div>
+      <div class="detail" id="dp-${i}" style="display:none"><div class="dtop"><div class="dlabel">Server ID</div><div class="did" id="did-${i}"></div></div><div class="dbody" id="db-${i}"></div></div>
+    </div>
+  </div>`).join('');
+  games.forEach((_,i)=>loadServers(i));
+}
+function sw(i){document.querySelectorAll('.gtab').forEach(t=>t.classList.toggle('act',+t.dataset.i===i));document.querySelectorAll('.gview').forEach(v=>v.classList.toggle('act',v.id===`gv-${i}`));}
+async function loadServers(i){
+  const g=games[i];const list=document.getElementById('sl-'+i);
+  try{
+    const d=await fetch(`https://yukrdobpqnfellxxeyxv.supabase.co/rest/v1/servers?select=*`,{headers:{'apikey':SBK,'Authorization':'Bearer '+SBK}}).then(r=>r.json());
+    const filtered=Array.isArray(d)?d.filter(s=>!s.game_id||s.game_id===g.universeId):[];
+    if(!filtered.length){list.innerHTML='<div style="color:#374151;font-size:13px;padding:20px 0">No active servers right now.</div>';return;}
+    list.innerHTML='';
+    filtered.forEach(s=>{const c=document.createElement('div');c.className='scard';
+      c.innerHTML=`<div><div class="sid">${esc(String(s.id).substring(0,22))}...</div><div class="sc">${s.total_players||0}/${s.max_players||40} players${s.is_shift_active?'<span class="stag">Shift Active</span>':''}</div></div><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#4b5563"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+      c.onclick=()=>{list.querySelectorAll('.scard').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');openDetail(i,s);};
+      list.appendChild(c);});
+  }catch{list.innerHTML='<div style="color:#374151;font-size:13px;padding:20px 0">Could not load servers.</div>';}
+}
+function openDetail(i,s){document.getElementById('de-'+i).style.display='none';const dp=document.getElementById('dp-'+i);dp.style.display='block';document.getElementById('did-'+i).textContent=s.id;let h='';if(s.is_shift_active)h+=`<div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:11px 14px;margin-bottom:14px;font-size:13px;color:#e0e0e0;font-weight:600">Shift hosted by ${esc(s.shift_host||'Unknown')}</div>`;if(s.teams?.length){s.teams.forEach(t=>{if(!t.players?.length)return;h+=`<div style="margin-bottom:16px"><div class="tl">${esc(t.name)} (${t.players.length})</div><div>${t.players.map(p=>`<span class="pchip">${esc(p)}</span>`).join('')}</div></div>`;});}else h+='<div style="color:#374151;font-size:13px">No team data.</div>';document.getElementById('db-'+i).innerHTML=h;}
+init();setInterval(()=>games.forEach((_,i)=>loadServers(i)),30000);
+</script>
+
+<script id="notif-js">
+(async()=>{try{const d=await fetch('/api/notifications').then(r=>r.json());const n=(d.notifications||[])[0];if(n){const bar=document.getElementById('notif-bar');bar.className=n.type||'info';document.getElementById('notif-msg').textContent=n.message;bar.style.display='block';}}catch{}})();
+</script></body></html>

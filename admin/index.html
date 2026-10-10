@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Owner Panel | Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh}
+input,select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 16px;font-size:14px;color:#f9fafb;font-family:inherit;outline:none;transition:border-color .2s;margin-bottom:10px}
+input:focus,select:focus{border-color:rgba(255,255,255,.3)}input::placeholder{color:#374151}select option{background:#1a1c24}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:13px;padding:12px 20px;border-radius:10px;transition:all .2s;cursor:pointer;border:none;font-family:inherit;text-decoration:none}
+.bw{background:#e0e0e0;color:#08090d}.bw:hover{background:#fff}
+.bgh{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#9ca3af}.bgh:hover{color:#fff;background:rgba(255,255,255,.1)}
+.bred{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171}.bred:hover{background:rgba(239,68,68,.22)}
+#lp{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.lcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:40px;width:100%;max-width:400px}
+.llogo{display:flex;align-items:center;gap:10px;margin-bottom:30px}.llogo img{width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1)}.llogo span{font-family:'Geist','Inter',sans-serif;font-weight:900;font-size:15px;letter-spacing:.04em}
+#ap{display:none;flex-direction:column;min-height:100vh}
+.topbar{background:rgba(8,9,13,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.tbrand{display:flex;align-items:center;gap:10px}.tbrand img{width:22px;height:22px;object-fit:contain;filter:brightness(0) invert(1)}.tbrand span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:14px;letter-spacing:.04em}
+.tright{display:flex;align-items:center;gap:10px}
+.opill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:600;color:#e0e0e0}
+.odot{width:6px;height:6px;border-radius:50%;background:#e0e0e0;animation:bl 1.4s ease infinite}@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.bsm{font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#9ca3af;cursor:pointer;font-family:inherit;transition:all .2s}.bsm:hover{background:rgba(255,255,255,.09);color:#fff}
+.layout{display:grid;grid-template-columns:215px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.07);padding:18px 10px;overflow-y:auto}
+.ssec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#374151;padding:0 10px;margin:18px 0 6px}.ssec:first-child{margin-top:0}
+.slink{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;transition:all .2s;border:none;background:none;width:100%;font-family:inherit;text-align:left}
+.slink:hover{background:rgba(255,255,255,.05);color:#e0e0e0}.slink.act{background:rgba(255,255,255,.08);color:#fff;font-weight:600}
+.sbadge{margin-left:auto;background:rgba(255,255,255,.08);border-radius:5px;padding:1px 7px;font-size:10px;font-weight:700;color:#6b7280}
+.content{padding:32px;overflow:auto}
+.pv{display:none}.pv.act{display:block}
+.ph{margin-bottom:24px}.ph h1{font-family:'Geist','Inter',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}.ph p{color:#4b5563;font-size:13px}
+.srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+.sc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px}.scv{font-family:'Geist','Inter',sans-serif;font-size:28px;font-weight:800;margin-bottom:2px}.scl{font-size:11px;color:#4b5563;font-weight:500}
+.dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.dc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
+.dch{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between}
+.dct{font-size:13px;font-weight:700}.dcc{font-size:11px;color:#4b5563}
+.mr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.05)}.mr:last-child{border-bottom:none}
+.mr img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#1a1c24;flex-shrink:0}
+.mn{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mm{font-size:10px;color:#4b5563}
+.macts{display:flex;gap:5px;flex-shrink:0}
+.ib{width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:#6b7280;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px}
+.ib:hover{background:rgba(255,255,255,.09);color:#fff}.ib.d:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#f87171}
+.fc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px;margin-bottom:20px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fgl{display:flex;flex-direction:column;gap:6px}.fgl label{font-size:11px;font-weight:700;color:#4b5563;letter-spacing:.04em;text-transform:uppercase}.fgl input,.fgl select{margin-bottom:0}
+.gcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.gc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}.gc img{width:100%;height:110px;object-fit:cover;display:block;background:#111}
+.gcb{padding:14px 16px}.gcn{font-size:13px;font-weight:700;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcst{display:flex;gap:10px;font-size:11px;color:#4b5563;margin-bottom:12px}
+.toggle{position:relative;width:36px;height:20px;flex-shrink:0}.toggle input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#2a2a2a;border-radius:100px;transition:.3s;cursor:pointer}.slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;bottom:3px;background:#888;border-radius:50%;transition:.3s}.toggle input:checked+.slider{background:#3a3a3a}.toggle input:checked+.slider::before{transform:translateX(16px);background:#e0e0e0}
+.arow{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}.arow:last-child{border-bottom:none}
+.atag{background:rgba(255,255,255,.06);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;color:#9ca3af;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.urc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px;display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.urc img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#1a1c24;flex-shrink:0;border:2px solid rgba(255,255,255,.1)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;margin-top:16px}
+.rbtn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:10px 14px;font-size:12px;font-weight:600;color:#9ca3af;cursor:pointer;font-family:inherit;transition:all .2s;text-align:left;width:100%}
+.rbtn:hover{background:rgba(255,255,255,.09);color:#fff}.rbtn.cur{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}
+.rbtn .rr{font-size:10px;font-weight:400;color:#374151;display:block;margin-top:2px}
+.logrow{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}.logrow:last-child{border-bottom:none}
+.logi{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:rgba(255,255,255,.05)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}.modal-bg.open{display:flex}
+.modal{background:#111318;border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:28px;width:100%;max-width:460px}
+.modal h2{font-family:'Geist','Inter',sans-serif;font-size:18px;font-weight:800;margin-bottom:6px}.modal p{color:#4b5563;font-size:13px;margin-bottom:16px}
+.mrow{display:flex;gap:10px;margin-top:20px}
+.bcancel{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#9ca3af;font-size:13px;font-weight:600;padding:11px;border-radius:9px;cursor:pointer;font-family:inherit}
+.bconfirm{flex:1;background:#e0e0e0;color:#08090d;font-size:13px;font-weight:700;padding:11px;border-radius:9px;border:none;cursor:pointer;font-family:inherit}
+.toast{position:fixed;bottom:24px;right:24px;background:#1a1c24;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 18px;font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all .35s;pointer-events:none;max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}.toast.ok{border-color:rgba(220,220,220,.3);color:#e0e0e0}.toast.fail{border-color:rgba(239,68,68,.4);color:#f87171}
+@media(max-width:768px){.layout{grid-template-columns:1fr}.sidebar{display:none}.fg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="lp">
+  <div class="lcard">
+    <div class="llogo"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE OWNER PANEL</span></div>
+    <h2 style="font-family:'Geist','Inter',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">Welcome back</h2>
+    <p style="color:#4b5563;font-size:13px;margin-bottom:28px">Sign in to manage Parkside Stores.</p>
+    <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="btn bw" id="lbtn" style="width:100%;font-size:14px;padding:13px">Sign In</button>
+    <div style="color:#f87171;font-size:12px;text-align:center;margin-top:8px;min-height:18px" id="lerr"></div>
+  </div>
+</div>
+<div id="ap">
+  <div class="topbar">
+    <div class="tbrand"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE OWNER PANEL</span></div>
+    <div class="tright">
+      <div class="opill"><span class="odot"></span><span id="onc">Loading...</span></div>
+      <a href="/" target="_blank" class="bsm">View Site</a>
+      <button class="bsm" id="lout">Sign out</button>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="ssec">Dashboard</div>
+      <button class="slink act" data-p="overview"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Overview</button>
+      <div class="ssec">Staff</div>
+      <button class="slink" data-p="departments"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Departments<span class="sbadge" id="dept-badge">0</span></button>
+      <button class="slink" data-p="add-person"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Add Person</button>
+      <div class="ssec">Group</div>
+      <button class="slink" data-p="manage-user"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Manage User</button>
+      <button class="slink" data-p="audit"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>Audit Log</button>
+      <div class="ssec">Games</div>
+      <button class="slink" data-p="games"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Games<span class="sbadge" id="game-badge">0</span></button>
+      <button class="slink" data-p="add-game"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Add Game</button>
+      <div class="ssec">Other</div>
+      <button class="slink" data-p="activity"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Activity Log</button>
+      <button class="slink" data-p="links"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Quick Links</button>
+    </div>
+    <div class="content">
+      <div class="pv act" id="pv-overview">
+        <div class="ph"><h1>Overview</h1><p>Live stats from Roblox and your servers.</p></div>
+        <div class="srow">
+          <div class="sc"><div class="scv" id="ov-mem">—</div><div class="scl">Group Members</div></div>
+          <div class="sc"><div class="scv" id="ov-vis">—</div><div class="scl">Total Visits</div></div>
+          <div class="sc"><div class="scv" id="ov-onl">—</div><div class="scl">Players Online</div></div>
+          <div class="sc"><div class="scv" id="ov-srv">—</div><div class="scl">Active Servers</div></div>
+          <div class="sc"><div class="scv" id="ov-dep">—</div><div class="scl">Dept Members</div></div>
+          <div class="sc"><div class="scv" id="ov-gam">—</div><div class="scl">Tracked Games</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px">
+            <div style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Quick Actions</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <button class="slink" onclick="sp('add-person')">+ Add department member</button>
+              <button class="slink" onclick="sp('manage-user')">Manage a group member</button>
+              <button class="slink" onclick="sp('audit')">View audit log</button>
+              <button class="slink" onclick="sp('add-game')">+ Add tracked game</button>
+              <a href="/staff" target="_blank" class="slink" style="text-decoration:none">View public staff page</a>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px">
+            <div style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Group Info</div>
+            <div id="grp-info" style="color:#374151;font-size:13px">Loading...</div>
+          </div>
+        </div>
+      </div>
+      <div class="pv" id="pv-departments">
+        <div class="ph"><h1>Departments</h1><p>Manage members. Click edit to move someone to a different department.</p></div>
+        <div class="dcards" id="dept-cards"><div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">Loading...</div></div>
+      </div>
+      <div class="pv" id="pv-add-person">
+        <div class="ph"><h1>Add Person</h1><p>Add a Roblox user to a department. Rank auto-fills from the group.</p></div>
+        <div class="fc" style="max-width:560px">
+          <div class="fg">
+            <div class="fgl"><label>Roblox Username</label><input id="ap-u" placeholder="e.g. ParkUser123"></div>
+            <div class="fgl"><label>Department</label><input id="ap-d" placeholder="e.g. Security"></div>
+            <div class="fgl"><label>Rank Override (optional)</label><input id="ap-r" placeholder="Auto-filled from group"></div>
+            <div style="display:flex;align-items:flex-end"><button class="btn bw" id="ap-btn" style="width:100%;padding:12px">Add Person</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="pv" id="pv-manage-user">
+        <div class="ph"><h1>Manage User</h1><p>Search any group member to promote, demote or exile them.</p></div>
+        <div class="fc" style="max-width:480px;margin-bottom:20px">
+          <div style="display:flex;gap:10px"><input id="mu-q" placeholder="Roblox username" style="margin-bottom:0;flex:1"><button class="btn bw" id="mu-btn" style="padding:12px 20px">Search</button></div>
+        </div>
+        <div id="mu-found" style="display:none">
+          <div class="urc"><img id="mu-av" src="" alt=""><div style="flex:1"><div style="font-size:16px;font-weight:800;margin-bottom:4px" id="mu-name"></div><div style="font-size:13px;color:#4b5563">Current rank: <strong style="color:#f9fafb" id="mu-rank"></strong></div><div style="margin-top:12px"><button class="btn bred" id="mu-exile" style="padding:8px 16px;font-size:12px">Exile from Group</button></div></div></div>
+          <div style="font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Set Rank</div>
+          <div class="rgrid" id="mu-roles"></div>
+        </div>
+        <div id="mu-none" style="color:#374151;font-size:13px;padding:20px 0;display:none">User not found or not in group.</div>
+      </div>
+      <div class="pv" id="pv-audit">
+        <div class="ph"><h1>Audit Log</h1><p>Recent actions in the Parkside Stores Roblox group.</p></div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px">
+          <div id="audit-list"><div style="color:#374151;font-size:13px;text-align:center;padding:32px 0">Loading...</div></div>
+          <div style="text-align:center;margin-top:16px"><button class="btn bgh" id="audit-more" style="font-size:12px;padding:8px 20px;display:none">Load More</button></div>
+        </div>
+      </div>
+      <div class="pv" id="pv-games">
+        <div class="ph"><h1>Tracked Games</h1><p>Toggle games on or off.</p></div>
+        <div class="gcards" id="game-cards"><div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">Loading...</div></div>
+      </div>
+      <div class="pv" id="pv-add-game">
+        <div class="ph"><h1>Add Game</h1><p>Enter the Universe ID. Find it in Roblox Studio under Game Settings.</p></div>
+        <div class="fc" style="max-width:480px">
+          <div class="fgl" style="margin-bottom:12px"><label>Universe ID</label><input id="ag-uid" placeholder="e.g. 7264690285" type="number"></div>
+          <button class="btn bw" id="ag-btn" style="width:100%;padding:12px">Add Game</button>
+        </div>
+      </div>
+      <div class="pv" id="pv-activity">
+        <div class="ph"><h1>Activity Log</h1><p>Changes made through this panel this session.</p></div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px"><div id="act-log"><div style="color:#374151;font-size:13px;text-align:center;padding:24px 0">No activity recorded yet.</div></div></div>
+      </div>
+      <div class="pv" id="pv-links">
+        <div class="ph"><h1>Quick Links</h1></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px" id="ql"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-bg" id="em"><div class="modal"><h2>Edit Member</h2><p>Move <strong id="en"></strong> to a different department.</p><div class="fgl" style="margin-bottom:10px"><label>Department</label><input id="ed" placeholder="New department" style="margin-bottom:0"></div><div class="fgl"><label>Rank Override (optional)</label><input id="er" placeholder="Leave blank to keep current" style="margin-bottom:0"></div><div class="mrow"><button class="bcancel" onclick="closeEm()">Cancel</button><button class="bconfirm" id="ec">Save</button></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const G=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const api=(u,m='GET',b)=>fetch(u,{method:m,headers:{'content-type':'application/json'},body:b?JSON.stringify(b):undefined}).then(async r=>({ok:r.ok,d:await r.json().catch(()=>({}))}));
+let alog=[],et=null,mu=null,roles=[],ac=null;
+
+function toast(msg,ok=true){const t=G('toast');t.textContent=msg;t.className='toast '+(ok?'ok':'fail');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+function addAct(msg,icon='📝'){alog.unshift({msg,icon,t:new Date().toLocaleTimeString()});G('act-log').innerHTML=alog.map(a=>`<div class="logrow"><div class="logi">${a.icon}</div><div><div style="font-size:13px">${esc(a.msg)}</div><div style="font-size:11px;color:#374151;margin-top:2px">${a.t}</div></div></div>`).join('');}
+function sp(p){document.querySelectorAll('.slink[data-p]').forEach(b=>b.classList.toggle('act',b.dataset.p===p));document.querySelectorAll('.pv').forEach(v=>v.classList.toggle('act',v.id==='pv-'+p));if(p==='audit'&&G('audit-list').textContent.includes('Loading'))loadAudit();}
+document.querySelectorAll('.slink[data-p]').forEach(b=>b.addEventListener('click',()=>sp(b.dataset.p)));
+
+G('ql').innerHTML=[['🎮','Roblox Group','https://www.roblox.com/communities/993201720/Parkside-Stores-Limited'],['💬','Discord','https://discord.gg/ceAmhWdhda'],['⚙️','Staff Portal','https://parksidestores.planetaryapp.cloud/'],['🌐','Public Site','/'],['👥','Staff Page','/staff'],['🏆','Ranks Page','/ranks'],['📡','Servers','/servers']].map(([i,l,u])=>`<a href="${u}" target="_blank" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(255,255,255,.18)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">${i} ${l} ↗</a>`).join('');
+
+async function init(){const{d}=await api('/api/login');if(d.owner)showApp();}
+G('lbtn').onclick=async()=>{G('lerr').textContent='';G('lbtn').textContent='Signing in...';const r=await api('/api/login','POST',{password:G('pw').value});G('pw').value='';G('lbtn').textContent='Sign In';if(r.ok)showApp();else G('lerr').textContent=r.d.error||'Wrong password';};
+G('pw').onkeydown=e=>e.key==='Enter'&&G('lbtn').click();
+G('lout').onclick=async()=>{await api('/api/login','DELETE');location.reload();};
+function showApp(){G('lp').style.display='none';G('ap').style.display='flex';loadAll();}
+
+async function loadAll(){loadStats();loadDepts();loadGames();loadRoles();}
+
+async function loadStats(){
+  try{const g=await fetch('https://groups.roproxy.com/v1/groups/993201720').then(r=>r.json());G('ov-mem').textContent=(g.memberCount||0).toLocaleString();G('grp-info').innerHTML=`<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between"><span style="color:#4b5563">Group ID</span><span style="font-weight:600">993201720</span></div><div style="display:flex;justify-content:space-between"><span style="color:#4b5563">Members</span><span style="font-weight:600">${(g.memberCount||0).toLocaleString()}</span></div><div style="display:flex;justify-content:space-between"><span style="color:#4b5563">Owner</span><span style="font-weight:600">${g.owner?.username||'—'}</span></div></div>`;}catch{}
+  try{const{d}=await api('/api/games');if(d.games?.length){G('ov-onl').textContent=d.games.reduce((a,x)=>a+(x.playing||0),0).toLocaleString();const tv=d.games.reduce((a,x)=>a+(x.visits||0),0);G('ov-vis').textContent=tv>=1000?(tv/1000).toFixed(1)+'k':tv;G('onc').textContent=d.games.reduce((a,x)=>a+(x.playing||0),0)+' online';}}catch{}
+}
+async function loadRoles(){const{d}=await api('/api/roblox?action=roles');roles=d.roles||[];}
+async function loadDepts(){
+  const{d}=await api('/api/departments');const p=d.people||[];G('ov-dep').textContent=p.length;G('dept-badge').textContent=p.length;
+  const c=G('dept-cards');if(!p.length){c.innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">No one added yet.</div>';return;}
+  const by={};p.forEach(x=>(by[x.department]||=[]).push(x));
+  c.innerHTML=Object.entries(by).map(([dept,ps])=>`<div class="dc"><div class="dch"><div class="dct">${esc(dept)}</div><div class="dcc">${ps.length} member${ps.length!==1?'s':''}</div></div>${ps.map(x=>`<div class="mr"><img src="${esc(x.avatar||'')}" alt="" onerror="this.style.visibility='hidden'"><div style="flex:1;min-width:0"><div class="mn">${esc(x.name)}</div><div class="mm">${esc(x.rank)}</div></div><div class="macts"><button class="ib" onclick="openEm(${+x.id},'${esc(x.name)}','${esc(x.department)}','${esc(x.rank)}')" title="Edit">✏️</button><button class="ib d" onclick="rmP(${+x.id},'${esc(x.name)}')" title="Remove">🗑️</button></div></div>`).join('')}</div>`).join('');
+}
+async function loadGames(){
+  const{d}=await api('/api/games');const gs=d.games||[];G('ov-gam').textContent=gs.length;G('game-badge').textContent=gs.length;
+  const c=G('game-cards');if(!gs.length){c.innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:40px 0;text-align:center">No games added yet.</div>';return;}
+  c.innerHTML=gs.map(g=>`<div class="gc">${g.thumb?`<img src="${esc(g.thumb)}" alt="">`:'<div style="width:100%;height:110px;background:#111"></div>'}<div class="gcb"><div class="gcn">${esc(g.name)}</div><div class="gcst"><span>${(g.playing||0).toLocaleString()} playing</span><span>${((g.visits||0)/1000).toFixed(1)}k visits</span></div><div style="display:flex;gap:8px;justify-content:space-between;align-items:center"><label class="toggle"><input type="checkbox" ${g.enabled!==false?'checked':''} onchange="togG(${g.universeId},this.checked)"><span class="slider"></span></label><span style="font-size:11px;color:#4b5563">${g.enabled!==false?'Enabled':'Disabled'}</span><button class="ib d" onclick="rmG(${g.universeId},'${esc(g.name)}')" title="Remove">🗑️</button></div></div></div>`).join('');
+}
+async function loadAudit(cur=''){
+  const{d}=await api('/api/roblox?action=audit'+(cur?'&cursor='+cur:''));const rows=d.logs||[];
+  const ICONS={ChangeRank:'🔄',ExileUser:'🚫',AcceptJoinRequest:'✅',DeclineJoinRequest:'❌',PostGroupShout:'📢',RemoveMember:'🗑️'};
+  const html=rows.length?rows.map(r=>{const det=r.oldRole&&r.newRole?`${esc(r.target)}: ${esc(r.oldRole)} to ${esc(r.newRole)}`:r.target?esc(r.target):'';return`<div class="arow"><span class="atag">${ICONS[r.type]||'📋'} ${esc(r.type)}</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#e5e7eb">${esc(r.actor)}</div>${det?`<div style="font-size:11px;color:#4b5563;margin-top:2px">${det}</div>`:''}${r.time?`<div style="font-size:11px;color:#374151;margin-top:2px">${new Date(r.time).toLocaleString()}</div>`:''}</div></div>`;}).join(''):'<div style="color:#374151;font-size:13px;text-align:center;padding:24px 0">No entries. Check ROBLOX_API_KEY in Cloudflare Secrets.</div>';
+  G('audit-list').innerHTML=cur?G('audit-list').innerHTML+html:html;
+  ac=d.nextCursor||null;G('audit-more').style.display=ac?'inline-flex':'none';
+}
+G('audit-more').onclick=()=>loadAudit(ac);
+
+G('mu-btn').onclick=async()=>{
+  const q=G('mu-q').value.trim();if(!q)return;G('mu-btn').textContent='Searching...';G('mu-found').style.display='none';G('mu-none').style.display='none';
+  const{d}=await api('/api/roblox?action=search&q='+encodeURIComponent(q));G('mu-btn').textContent='Search';
+  if(!d.user||!d.user.inGroup){G('mu-none').style.display='block';return;}
+  mu=d.user;G('mu-av').src=d.user.avatar||'';G('mu-name').textContent=d.user.name;G('mu-rank').textContent=d.user.currentRole||'No rank';
+  G('mu-roles').innerHTML=roles.map(r=>`<button class="rbtn${r.name===d.user.currentRole?' cur':''}" onclick="setR(${r.id},'${esc(r.name)}')">${esc(r.name)}<span class="rr">Rank ${r.rank}</span></button>`).join('');
+  G('mu-found').style.display='block';
+};
+G('mu-q').onkeydown=e=>e.key==='Enter'&&G('mu-btn').click();
+async function setR(rid,rname){if(!mu||!confirm(`Set ${mu.name} to ${rname}?`))return;const r=await api('/api/roblox','POST',{action:'setRole',userId:mu.id,roleId:rid});if(r.ok){toast(`Set ${mu.name} to ${rname}`);addAct(`Set ${mu.name} to ${rname}`,'🔄');G('mu-rank').textContent=rname;document.querySelectorAll('.rbtn').forEach(b=>b.classList.toggle('cur',b.textContent.trim().startsWith(rname)));}else toast(r.d.error||'Failed.',false);}
+G('mu-exile').onclick=async()=>{if(!mu||!confirm(`Exile ${mu.name}?`))return;const r=await api('/api/roblox','POST',{action:'exile',userId:mu.id});if(r.ok){toast(`Exiled ${mu.name}`);addAct(`Exiled ${mu.name}`,'🚫');G('mu-found').style.display='none';mu=null;}else toast(r.d.error||'Failed.',false);};
+
+G('ap-btn').onclick=async()=>{const u=G('ap-u').value.trim(),d=G('ap-d').value.trim(),r=G('ap-r').value.trim();if(!u||!d){toast('Username and department required.',false);return;}G('ap-btn').textContent='Adding...';const res=await api('/api/departments','POST',{username:u,department:d,rank:r});G('ap-btn').textContent='Add Person';if(res.ok){toast('Added '+u+' to '+d);addAct('Added '+u+' to '+d,'➕');G('ap-u').value=G('ap-d').value=G('ap-r').value='';loadDepts();}else toast(res.d.error||'Error',false);};
+G('ag-btn').onclick=async()=>{const uid=G('ag-uid').value.trim();if(!uid){toast('Universe ID required.',false);return;}G('ag-btn').textContent='Adding...';const res=await api('/api/games','POST',{universeId:+uid});G('ag-btn').textContent='Add Game';if(res.ok){toast('Added: '+(res.d.game?.name||uid));addAct('Added game: '+(res.d.game?.name||uid),'🎮');G('ag-uid').value='';loadGames();}else toast(res.d.error||'Error',false);};
+
+async function rmP(id,name){if(!confirm('Remove '+name+'?'))return;const r=await api('/api/departments?id='+id,'DELETE');if(r.ok){toast('Removed '+name);addAct('Removed '+name,'🗑️');loadDepts();}else toast('Failed.',false);}
+async function rmG(uid,name){if(!confirm('Remove '+name+'?'))return;const r=await api('/api/games?universeId='+uid,'DELETE');if(r.ok){toast('Removed '+name);addAct('Removed game: '+name,'🗑️');loadGames();}else toast('Failed.',false);}
+async function togG(uid,en){const r=await api('/api/games','PATCH',{universeId:uid,enabled:en});if(r.ok){addAct((en?'Enabled':'Disabled')+' game '+uid,'🔄');loadGames();}else toast('Failed.',false);}
+
+function openEm(id,name,dept,rank){et={id,name,dept,rank};G('en').textContent=name;G('ed').value=dept;G('er').value=rank;G('em').classList.add('open');}
+function closeEm(){G('em').classList.remove('open');et=null;}
+G('em').addEventListener('click',e=>{if(e.target===G('em'))closeEm();});
+G('ec').onclick=async()=>{if(!et)return;const nd=G('ed').value.trim(),nr=G('er').value.trim();if(!nd){toast('Department required.',false);return;}G('ec').textContent='Saving...';const r=await api('/api/departments','POST',{username:et.name,department:nd,rank:nr||et.rank});G('ec').textContent='Save';if(r.ok){toast('Updated '+et.name);addAct('Moved '+et.name+' to '+nd,'🔄');closeEm();loadDepts();}else toast(r.d.error||'Failed.',false);};
+
+init();setInterval(loadStats,60000);
+</script>
+</body></html>

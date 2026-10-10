@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parkside Stores</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--g:#fff;--gd:rgba(255,255,255,.12);--s:rgba(255,255,255,.03);--b:rgba(255,255,255,.07);--m:#4b5563}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:#08090d;color:#f9fafb;font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+h1,h2,h3,.geist{font-family:'Geist','Inter',sans-serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;padding:0 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,9,13,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--b);transition:background .3s}
+.nl{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nl img{width:28px;height:28px;object-fit:contain;filter:brightness(0) invert(1)}
+.nl span{font-family:'Geist','Inter',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.05em}
+.nlinks{display:flex;gap:28px}
+.nlinks a{color:#6b7280;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.nlinks a:hover{color:#fff}
+.nb{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bg{background:#fff;color:#08090d}.bg:hover{background:#111111;transform:translateY(-1px)}
+.bgh{background:transparent;color:#9ca3af;border:1px solid rgba(255,255,255,.1)}.bgh:hover{background:rgba(200,200,200,.07);color:#fff}
+.bw{background:#fff;color:#08090d}.bw:hover{background:#e5e7eb;transform:translateY(-1px)}
+
+/* HERO */
+#hero{padding:118px 32px 70px;max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.htag{display:inline-flex;align-items:center;gap:8px;background:var(--gd);border:1px solid rgba(255,255,255,.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#e0e0e0;margin-bottom:22px}
+.hdot{width:6px;height:6px;border-radius:50%;background:#e0e0e0;box-shadow:0 0 8px #e0e0e0}
+.hh1{font-size:clamp(34px,5vw,62px);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:18px}
+.hh1 .ac{color:var(--g)}
+.hsub{color:#6b7280;font-size:16px;line-height:1.65;max-width:440px;margin-bottom:32px}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap}
+.hv{position:relative}
+.hw{border-radius:20px;overflow:hidden;border:1px solid var(--b);aspect-ratio:16/10;position:relative;background:#0d0f14}
+.hw img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.hw img.on{opacity:1}
+.hw::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent 60%);pointer-events:none}
+.lchip{position:absolute;top:14px;left:14px;background:rgba(8,9,13,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 13px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px;color:#fff;z-index:2}
+.lchip .bl{width:6px;height:6px;border-radius:50%;background:#e0e0e0;animation:bl 1.2s ease infinite}
+@keyframes bl{0%,100%{opacity:1;box-shadow:0 0 6px #e0e0e0}50%{opacity:.3;box-shadow:none}}
+
+/* GAMES SECTION */
+#games{border-top:1px solid var(--b);border-bottom:1px solid var(--b);background:rgba(200,200,200,.015);padding:36px 32px}
+.gi{max-width:1140px;margin:0 auto}
+.ghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.glabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g)}
+.gcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.gcard{background:var(--s);border:1px solid var(--b);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.gcard:hover{border-color:rgba(255,255,255,.15);transform:translateY(-3px)}
+.gcard img{width:100%;height:120px;object-fit:cover;display:block;background:#111}
+.gcinfo{padding:14px}
+.gcname{font-size:14px;font-weight:700;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcstats{display:flex;gap:12px;font-size:11px;color:var(--m)}
+.gcstat{display:flex;align-items:center;gap:4px}
+.gcstat .dot{width:5px;height:5px;border-radius:50%;background:#e0e0e0;display:inline-block}
+
+/* STATS */
+#stats{padding:72px 32px;max-width:1140px;margin:0 auto}
+.ey{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.eyl{display:none}
+.eyt{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#888}
+.stitle{font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.ssub{color:var(--m);font-size:15px;max-width:480px;line-height:1.6;margin-bottom:44px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.sc{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:26px 22px;transition:border-color .2s}
+.sc:hover{border-color:rgba(255,255,255,.13)}
+.sv{font-family:'Geist','Inter',sans-serif;font-size:40px;font-weight:900;color:#fff;line-height:1;margin-bottom:4px}
+.sl{color:var(--m);font-size:13px;font-weight:500}
+
+/* PHOTO STRIP */
+.pstrip{max-width:1140px;margin:0 auto;padding:0 32px 72px}
+.pgrid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:180px 180px;gap:10px;border-radius:20px;overflow:hidden}
+.pgrid .p1{grid-row:1/3}
+.pgrid div{overflow:hidden;border-radius:4px}
+.pgrid img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+.pgrid div:hover img{transform:scale(1.06)}
+
+/* RANKS PREVIEW */
+#ranks{max-width:1140px;margin:0 auto;padding:0 32px 72px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:44px}
+.rc{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:22px}
+.rc:hover{border-color:rgba(255,255,255,.12)}
+.rch{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.rch::before{content:'';width:8px;height:8px;border-radius:2px;display:inline-block;flex-shrink:0}
+.ri{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:#d1d5db;font-weight:500}
+.ri:last-child{border-bottom:none}
+.ri small{display:block;font-size:11px;color:#374151;font-weight:400;margin-top:2px}
+
+/* JOIN */
+#join{padding:72px 32px}
+.jinner{max-width:1140px;margin:0 auto}
+.jcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:44px}
+.jc{background:var(--s);border:1px solid var(--b);border-radius:18px;padding:28px;transition:all .25s}
+.jc:hover{background:rgba(200,200,200,.05);border-color:rgba(255,255,255,.12);transform:translateY(-3px)}
+.ji{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.jt{font-size:15px;font-weight:700;margin-bottom:5px}
+.js{font-size:13px;color:var(--m);line-height:1.6;margin-bottom:22px}
+
+footer{border-top:1px solid var(--b);padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;max-width:1140px;margin:0 auto}
+.fb{display:flex;align-items:center;gap:8px;text-decoration:none}
+.fb img{width:17px;height:17px;object-fit:contain;filter:brightness(0) invert(1);opacity:.35}
+.fb span{font-size:12px;color:#374151;font-weight:600;letter-spacing:.03em}
+.flinks{display:flex;gap:18px}
+.flinks a{font-size:12px;color:#374151;text-decoration:none;transition:color .2s}
+.flinks a:hover{color:#6b7280}
+
+@media(max-width:768px){#hero{grid-template-columns:1fr;padding:100px 20px 50px;gap:36px}.hv{order:-1}.nlinks{display:none}.pgrid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.pgrid .p1{grid-row:auto}}
+</style>
+
+<style id="notif-css">
+#notif-bar{display:none;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1);padding:10px 32px;text-align:center;font-size:13px;font-weight:500;position:relative}
+#notif-bar.info{background:rgba(255,255,255,.06)}
+#notif-bar.warning{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.2);color:#fbbf24}
+#notif-bar.alert{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#f87171}
+#notif-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;cursor:pointer;font-size:16px;opacity:.6}
+#notif-close:hover{opacity:1}
+</style></head>
+<body>
+
+<nav>
+  <a href="/" class="nl">
+    <img src="/images/logo-leaf.png" alt="">
+    <span>PARKSIDE STORES</span>
+  </a>
+  <div class="nlinks">
+    <a href="#games">Games</a>
+    <a href="#stats">Stats</a>
+    <a href="/staff">Staff</a>
+    <a href="/ranks">Ranks</a>
+    <a href="#join">Join</a>
+    <a href="/servers">Servers</a>
+  </div>
+  <div class="nb">
+    <a href="https://discord.gg/ceAmhWdhda" class="btn bgh">Discord</a>
+    <a href="https://www.roblox.com/communities/993201720/Parkside-Stores-Limited" class="btn bg">Join Group</a>
+  </div>
+</nav><div id="notif-bar"><span id="notif-msg"></span><button id="notif-close" onclick="document.getElementById('notif-bar').style.display='none'">×</button></div>
+
+
+<section id="hero">
+  <div>
+    <div class="htag"><span class="hdot"></span>Now Open on Roblox</div>
+    <h1 class="hh1 geist">Your Local<br><span class="ac">Parkside Store</span><br>Is Waiting</h1>
+    <p class="hsub">Browse the aisles, work your way up the ranks, or run the store yourself. A full supermarket experience on Roblox.</p>
+    <div class="hbtns">
+      <a href="https://www.roblox.com/games/89557838026604/Work-at-Parkside-Store" class="btn bw">Play Now</a>
+      <a href="/ranks" class="btn bgh">View Ranks</a>
+    </div>
+  </div>
+  <div class="hv">
+    <div class="hw" id="hw">
+      <div class="lchip"><span class="bl"></span><span id="livelab">Live</span></div>
+    </div>
+  </div>
+</section>
+
+
+<div id="games">
+  <div class="gi">
+    <div class="ghead">
+      <div class="glabel">Tracked Games</div>
+      <a href="/servers" style="font-size:12px;color:var(--m);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#9ca3af'" onmouseout="this.style.color='#4b5563'">View all servers →</a>
+    </div>
+    <div class="gcards" id="gcards">
+      <div style="color:#374151;font-size:13px;grid-column:1/-1;padding:16px 0">Loading games...</div>
+    </div>
+  </div>
+</div>
+
+
+<section id="stats">
+  <div class="ey"><div class="eyl"></div><div class="eyt">Community</div></div>
+  <h2 class="stitle geist">Growing Every Day</h2>
+  <p class="ssub">Join a thriving community of shoppers and staff across Roblox.</p>
+  <div class="sgrid">
+    <div class="sc"><div class="sv" id="sv-members">—</div><div class="sl">Group Members</div></div>
+    <div class="sc"><div class="sv" id="sv-visits">—</div><div class="sl">Total Game Visits</div></div>
+    <div class="sc"><div class="sv" id="sv-playing">—</div><div class="sl">Players Online</div></div>
+    <div class="sc"><div class="sv" id="sv-servers">—</div><div class="sl">Active Servers</div></div>
+  </div>
+</section>
+
+
+<div class="pstrip" id="pstrip">
+  <div class="pgrid" id="pgrid">
+    <div class="p1"><img id="pi0" src="" alt=""></div>
+    <div><img id="pi1" src="" alt=""></div>
+    <div><img id="pi2" src="" alt=""></div>
+    <div><img id="pi3" src="" alt=""></div>
+    <div><img id="pi4" src="" alt=""></div>
+  </div>
+</div>
+
+
+<section id="ranks">
+  <div class="ey"><div class="eyl"></div><div class="eyt">Progression</div></div>
+  <h2 class="stitle geist">Rank System</h2>
+  <p class="ssub">From customer to Store Director, every rank has its own responsibilities.</p>
+  <div class="rgrid">
+    <div class="rc"><div class="rch" style="color:#c084fc"><span style="background:#c084fc"></span>Executive Leadership</div>
+      <div class="ri">Group Holder</div>
+      <div class="ri">Store Director</div>
+      <div class="ri">Vice Director</div>
+    </div>
+    <div class="rc"><div class="rch" style="color:#f472b6"><span style="background:#f472b6"></span>Executive Management</div>
+      <div class="ri">Operations Officer</div>
+      <div class="ri">Staffing Officer</div>
+      <div class="ri">Development Officer</div>
+    </div>
+    <div class="rc"><div class="rch" style="color:#f87171"><span style="background:#f87171"></span>Development Team</div>
+      <div class="ri">Development Team</div>
+    </div>
+    <div class="rc"><div class="rch" style="color:#818cf8"><span style="background:#818cf8"></span>Directorship Management</div>
+      <div class="ri">Board Of Directors<small>Department Lead</small></div>
+      <div class="ri">Junior Director<small>Department Co-Lead</small></div>
+      <div class="ri">Intern Director<small>Department Manager</small></div>
+    </div>
+    <div class="rc"><div class="rch" style="color:#60a5fa"><span style="background:#60a5fa"></span>Senior Management</div>
+      <div class="ri">Head Corporate</div>
+      <div class="ri">Senior Corporate</div>
+      <div class="ri">Junior Corporate</div>
+      <div class="ri">Intern Corporate</div>
+    </div>
+    <div class="rc"><div class="rch" style="color:#34d399"><span style="background:#34d399"></span>Management Team</div>
+      <div class="ri">Booster Manager<small>Gain from boosting the server</small></div>
+      <div class="ri">Regional Manager</div>
+      <div class="ri">Store Manager</div>
+      <div class="ri">Assistant Manager</div>
+      <div class="ri">Store Supervisor</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:28px"><a href="/ranks" class="btn bgh" style="font-size:13px">Full Rank Details →</a></div>
+</section>
+
+
+<section id="join">
+  <div class="jinner">
+    <div class="ey"><div class="eyl"></div><div class="eyt">Get Started</div></div>
+    <h2 class="stitle geist">Ready to Join?</h2>
+    <p class="ssub">Pick your entry point and become part of the Parkside community.</p>
+    <div class="jcards">
+      <div class="jc"><div class="ji" style="background:var(--gd)">🎮</div><div class="jt">Play on Roblox</div><div class="js">Jump into the store and start your Parkside journey.</div><a href="https://www.roblox.com/games/89557838026604/Work-at-Parkside-Store" class="btn bg" style="width:100%">Play Now</a></div>
+      <div class="jc"><div class="ji" style="background:rgba(88,101,242,.15)">💬</div><div class="jt">Discord Server</div><div class="js">Announcements, events and the full community.</div><a href="https://discord.gg/ceAmhWdhda" class="btn bgh" style="width:100%">Join Discord</a></div>
+      <div class="jc"><div class="ji" style="background:rgba(200,200,200,.05)">🏪</div><div class="jt">Roblox Group</div><div class="js">Join the group to receive your in-game rank.</div><a href="https://www.roblox.com/communities/993201720/Parkside-Stores-Limited" class="btn bgh" style="width:100%">Join Group</a></div>
+      <div class="jc"><div class="ji" style="background:rgba(200,200,200,.05)">⚙️</div><div class="jt">Staff Portal</div><div class="js">For staff, access your dashboard and duties.</div><a href="https://parksidestores.planetaryapp.cloud/" class="btn bgh" style="width:100%">Staff Portal</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="/" class="fb"><img src="/images/logo-leaf.png" alt=""><span>PARKSIDE STORES &nbsp;· &nbsp;© 2026</span></a>
+  <div class="flinks">
+    <a href="/staff">Staff</a>
+    <a href="/ranks">Ranks</a>
+    <a href="/servers">Servers</a>
+    <a href="https://discord.gg/ceAmhWdhda">Discord</a>
+  </div>
+</footer>
+
+<script>
+const PHOTOS=['/images/store.png','/images/cafe.png','/images/bg.png'];
+function rndPhoto(){return PHOTOS[Math.floor(Math.random()*PHOTOS.length)];}
+
+// Hero slideshow
+const hw=document.getElementById('hw');
+let imgs=PHOTOS.map((src,i)=>{const el=document.createElement('img');el.src=src;el.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease';hw.appendChild(el);return el;});
+let ci=0;imgs[ci].style.opacity='1';
+setInterval(()=>{imgs[ci].style.opacity='0';ci=(ci+1)%imgs.length;imgs[ci].style.opacity='1';},5000);
+
+// Photo strip random
+['pi0','pi1','pi2','pi3','pi4'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.src=rndPhoto();
+});
+
+// Load games
+async function loadGames(){
+  try{
+    const{games}=await fetch('/api/games').then(r=>r.json());
+    const c=document.getElementById('gcards');
+    if(!games?.length){c.innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:16px 0">No games tracked yet.</div>';return;}
+    c.innerHTML=games.map(g=>`<a href="https://www.roblox.com/games/${g.rootPlaceId}" target="_blank" rel="noopener" class="gcard">
+      ${g.thumb?`<img src="${g.thumb}" alt="${g.name}">`:'<div style="width:100%;height:120px;background:#111"></div>'}
+      <div class="gcinfo">
+        <div class="gcname">${g.name}</div>
+        <div class="gcstats">
+          <div class="gcstat"><span class="dot"></span>${(g.playing||0).toLocaleString()} playing</div>
+          <div class="gcstat">${((g.visits||0)/1000).toFixed(1)}k visits</div>
+        </div>
+      </div>
+    </a>`).join('');
+    const total=games.reduce((a,g)=>a+(g.playing||0),0);
+    document.getElementById('livelab').textContent=total+' online';
+  }catch{document.getElementById('gcards').innerHTML='<div style="color:#374151;font-size:13px;grid-column:1/-1;padding:16px 0">Could not load games.</div>';}
+}
+
+// Stats
+async function loadStats(){
+  try{const g=await fetch('https://groups.roproxy.com/v1/groups/993201720').then(r=>r.json());animN('sv-members',g.memberCount||0);}catch{}
+  try{const{games}=await fetch('/api/games').then(r=>r.json()).catch(()=>({games:[]}));
+    if(games?.length){
+      const tp=games.reduce((a,g)=>a+(g.playing||0),0);
+      const tv=games.reduce((a,g)=>a+(g.visits||0),0);
+      animN('sv-playing',tp);animN('sv-visits',tv);
+    }
+  }catch{}
+  try{const s=await fetch('https://yukrdobpqnfellxxeyxv.supabase.co/rest/v1/servers?select=total_players',{headers:{'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1a3Jkb2JwcW5mZWxseHhleXh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyNDEyMDUsImV4cCI6MjEwMjgxNzIwNX0.anh0lWDFEBcjG2J_dcX53JE14BoTVpy2waOlcopinug'}}).then(r=>r.json());
+    if(Array.isArray(s))animN('sv-servers',s.length);
+  }catch{}
+}
+function animN(id,t){const el=document.getElementById(id);let n=0;const f=()=>{n=Math.min(n+Math.max(1,Math.ceil(t/60)),t);el.textContent=t>9999?(n/1000).toFixed(1)+'k':n.toLocaleString();if(n<t)requestAnimationFrame(f);};requestAnimationFrame(f);}
+loadGames();loadStats();setInterval(()=>{loadGames();loadStats();},60000);
+</script>
+
+<script id="notif-js">
+(async()=>{try{const d=await fetch('/api/notifications').then(r=>r.json());const n=(d.notifications||[])[0];if(n){const bar=document.getElementById('notif-bar');bar.className=n.type||'info';document.getElementById('notif-msg').textContent=n.message;bar.style.display='block';}}catch{}})();
+</script></body>
+</html>
